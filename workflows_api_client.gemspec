@@ -3,8 +3,8 @@ require_relative 'lib/workflows_api_client/version'
 Gem::Specification.new do |spec|
   spec.name = 'workflows_api_client'
   spec.version = WorkflowsApiClient::VERSION
-  spec.authors = ['JoaquinSeita']
-  spec.email = ['joaquin.seita@widergy.com']
+  spec.authors = ['Widergy']
+  spec.email = ['PENDING']
 
   spec.summary = 'Create the necessary interface to interact with API Workflows'
   spec.description = 'Create the necessary interface to interact with API Workflows, it will only
