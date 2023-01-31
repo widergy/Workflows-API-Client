@@ -9,7 +9,7 @@ be necessary to configure and define where the routes will be created
 
 Add gem 'workflows_api_client' to your gemfile
 
-<!-- Run rails g workflows_api_client:install -->
+Run rails g workflows_api_client:install
 
 Install with bundler 'bundle install'
 ## Usage and Configuration
