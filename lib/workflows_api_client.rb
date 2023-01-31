@@ -1,9 +1,11 @@
+require 'workflows_api_client/engine.rb'
+
 module WorkflowsApiClient
   @config = {
     workflows_api_url: '',
     consumer_api_key: '',
     consumer_api_secret: '',
-    async_request_helper: '',
+    async_request_helper: 'AsyncRequest::ApplicationHelper',
     controller_to_inherit_authentication: 'ApplicationController',
     services_namespace: 'workflows',
     define_routes_manually: false
