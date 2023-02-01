@@ -4,4 +4,4 @@ source 'https://rubygems.org'
 gemspec
 
 # To use a debugger
-# gem 'byebug'
+gem 'byebug'
