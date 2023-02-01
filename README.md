@@ -176,7 +176,7 @@ To install the gem locally in another project, add this line to the Gemfile:
 - For running code style analyzer:
 
 ```bash
-  bundle exec rubocop app spec
+  bundle exec rubocop
 ```
 
 ## About
