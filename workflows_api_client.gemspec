@@ -47,7 +47,7 @@ Gem::Specification.new do |spec|
 
   # RSpec testing framework for Ruby on Rails as a drop-in alternative to its default testing
   # framework, Minitest.
-  spec.add_development_dependency 'rspec-rails', '~> 3.8'
+  spec.add_development_dependency 'rspec-rails'
 
   # Code style
   spec.add_development_dependency 'rubocop', '~> 0.88'
