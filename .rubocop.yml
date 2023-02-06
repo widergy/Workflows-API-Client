@@ -55,3 +55,9 @@ RSpec/AnyInstance:
 
 RSpec/NamedSubject:
   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+    - config/routes.rb
+    - ./*.gemspec
