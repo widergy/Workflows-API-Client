@@ -1,5 +1,5 @@
 module WorkflowsApiClient
-  class AuthenticationHeaders
+  class RequestAuthenticator
     attr_accessor :api_key, :api_secret, :key, :digest
 
     def initialize
@@ -50,11 +50,10 @@ module WorkflowsApiClient
 
     def set_key_and_digest
       nonce = Time.now.to_i
-      auth_key = "#{api_key}:#{nonce}"
+      @key = "#{api_key}:#{nonce}"
       digest_method = OpenSSL::Digest.new('SHA256')
-      hash = OpenSSL::HMAC.digest(digest_method, api_secret, auth_key)
+      hash = OpenSSL::HMAC.digest(digest_method, api_secret, key)
       @digest = Base64.strict_encode64(hash)
-      @key = auth_key
     end
   end
 end

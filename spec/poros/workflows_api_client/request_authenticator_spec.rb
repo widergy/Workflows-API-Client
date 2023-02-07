@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe WorkflowsApiClient::AuthenticationHeaders do
+describe WorkflowsApiClient::RequestAuthenticator do
   subject { described_class.new  }
 
   let(:api_key) { 'test_api_key' }
