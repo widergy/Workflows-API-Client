@@ -1,5 +1,5 @@
 module WorkflowsApiClient
-  module InheritHelper
+  module ControllerInheritanceHelper
     def self.inherit
       controller_config = WorkflowsApiClient.config[:controller_to_inherit_authentication]
       controller_class = "::#{controller_config}".safe_constantize
