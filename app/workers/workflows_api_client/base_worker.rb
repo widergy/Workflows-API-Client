@@ -1,7 +1,5 @@
 module WorkflowsApiClient
   class BaseWorker
-    attr_accessor :response, :service, :async
-
     workflows_api_url = WorkflowsApiClient.config[:workflows_api_url]
     if workflows_api_url.blank?
       raise WorkflowsApiClient::Exceptions::InvalidConfiguration, 'workflows_api_url'
@@ -12,8 +10,7 @@ module WorkflowsApiClient
     WORKFLOWS_RESPONSE_SERVICE_URL = 'workflow_responses'.freeze
 
     def execute(params)
-      @service = build_service(formatted_params(params))
-      perform
+      perform(build_service(formatted_params(params)))
     end
 
     private
