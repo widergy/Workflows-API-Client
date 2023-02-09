@@ -9,7 +9,31 @@ require 'rspec/rails'
 ENGINE_RAILS_ROOT = File.join(File.dirname(__FILE__), '../')
 Dir[File.join(ENGINE_RAILS_ROOT, 'spec/support/**/*.rb')].sort.each { |f| require f }
 
+# simplecov
+require 'simplecov'
+SimpleCov.start
+
+# VCR Configuration
+require 'vcr'
+require 'webmock/rspec'
+
+# HTTParty
+require 'httparty'
+
 ActiveRecord::Migration.maintain_test_schema!
+
+VCR_LOGGER_PATH = Rails.root.join("/log/#{Rails.env}/vcr.log").freeze
+
+VCR.configure do |c|
+  c.before_record do |cassette|
+    cassette.response.body.force_encoding('UTF-8')
+  end
+  c.ignore_hosts 'codeclimate.com'
+  c.cassette_library_dir = 'spec/cassettes'
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+  c.allow_http_connections_when_no_cassette = false
+end
 
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
