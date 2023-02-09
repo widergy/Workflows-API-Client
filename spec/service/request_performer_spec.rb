@@ -33,7 +33,7 @@ RSpec.describe WorkflowsApiClient::RequestPerformer do
 
     let(:http_method) { :get }
     let(:body_params) { nil }
-    let(:headers) { { 'Utility-ID': '7' } }
+    let(:headers) { { 'Utility-Id': '7' } }
     let(:query_params) { nil }
     let(:uri_params) { nil }
     let(:url) { WorkflowsApiClient.config[:workflows_api_url] + 'workflows' }
