@@ -3,7 +3,12 @@ module WorkflowsApiClient
     include WorkflowsApiClient::RequestPerformerHelper
 
     def initialize(service)
-      initialize_variables(service)
+      @http_method = service[:http_method]
+      @body_params = service[:body_params]
+      @headers = service[:headers]
+      @query_params = service[:query_params]
+      @uri_params = service[:uri_params]
+      @url = service[:url]
     end
 
     # rubocop:disable Metrics/AbcSize, Metrics/MethodLength

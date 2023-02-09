@@ -16,15 +16,6 @@ module WorkflowsApiClient
 
     private
 
-    def initialize_variables(service)
-      @http_method = service[:http_method]
-      @body_params = service[:body_params]
-      @headers = service[:headers]
-      @query_params = service[:query_params]
-      @uri_params = service[:uri_params]
-      @url = service[:url]
-    end
-
     def log_request
       ::Rails.logger.info do
         "\n\nSending #{http_method} request to URL: #{url} \n" \
