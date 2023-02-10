@@ -17,7 +17,7 @@ module WorkflowsApiClient
     private
 
     def log_request
-      ::Rails.logger.info do
+      Rails.logger.info do
         "\n\nSending #{http_method} request to URL: #{url} \n" \
         "Headers: #{headers} \n Body: #{body_params} \n" \
         "Query params: #{query_params}\n\n"
@@ -25,7 +25,7 @@ module WorkflowsApiClient
     end
 
     def log_response(response)
-      ::Rails.logger.info do
+      Rails.logger.info do
         "\n\nReceiving response from: \n" \
         "External API NAME: API-Workflows \n" \
         "Status Code: #{response&.code} \n" \
@@ -63,14 +63,14 @@ module WorkflowsApiClient
     end
 
     def log_error(e, http_method: nil, url: nil)
-      ::Rails.logger.error do
+      Rails.logger.error do
         "\n\nError for API Workflows, request: #{http_method} #{url} \n" \
         "#{e.message} \n #{e.backtrace&.join("\n")}\n\n"
       end
     end
 
     def log_warning(e, http_method: nil, url: nil)
-      ::Rails.logger.warn do
+      Rails.logger.warn do
         "\n\nWarning for API Workflows, request: #{http_method} #{url} \n" \
         "#{e.message}\n\n"
       end
@@ -78,7 +78,7 @@ module WorkflowsApiClient
 
     def log_and_report_error(e, http_method: nil, url: nil)
       log_error(e, http_method: http_method, url: url)
-      ::Rollbar.error(e, api: 'API Workflows', url: "#{http_method} #{url}")
+      Rollbar.error(e, api: 'API Workflows', url: "#{http_method} #{url}")
     end
   end
 end

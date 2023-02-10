@@ -10,7 +10,7 @@ module WorkflowsApiClient
     WORKFLOWS_RESPONSE_SERVICE_URL = 'workflow_responses'.freeze
 
     def execute(params)
-      perform(build_service(formatted_params(params)))
+      perform(build_service(params))
     end
 
     private
@@ -20,26 +20,13 @@ module WorkflowsApiClient
       [response.code, response.body]
     end
 
-    def formatted_params(params)
-      params
-    end
-
     def build_service(service_args)
       {
-        http_method: service_args[:http_method],
         body_params: service_args[:body_params],
         headers: service_args[:headers],
         query_params: service_args[:query_params],
-        uri_params: service_args[:uri_params],
-        url: BASE_URL + service_args[:url]
-      }
-    end
-
-    def service_params(method, url)
-      {
-        http_method: method,
-        url: url
-      }
+        uri_params: service_args[:uri_params]
+      }.merge(service_params)
     end
   end
 end
