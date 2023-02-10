@@ -15,7 +15,7 @@ module WorkflowsApiClient
 
     private
 
-    def perform
+    def perform(service)
       response = WorkflowsApiClient::RequestPerformer.new(service).perform
       [response.code, response.body]
     end
