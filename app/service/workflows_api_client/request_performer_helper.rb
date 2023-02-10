@@ -28,6 +28,7 @@ module WorkflowsApiClient
       Rails.logger.info do
         "\n\nReceiving response from: \n" \
         "External API NAME: API-Workflows \n" \
+        "Service: #{http_method} #{url} \n" \
         "Status Code: #{response&.code} \n" \
         "Content-Type: #{response&.headers&.fetch('content-type', {})} \n" \
         "Body:#{response&.parsed_response}\n" \
