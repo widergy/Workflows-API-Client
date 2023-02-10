@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://private-720a83-workflowsapi1.apiary-mock.com/api/v1/workflows
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Utility-Id:
+      - '8'
+      Key:
+      - APPLICATION_API_KEY:1676034102
+      Digest:
+      - IJgQkwfHrqh9Jk/Bea/ZZuB/VR2smiBfuXlgZI1Tq54=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '509'
+      X-Apiary-Ratelimit-Limit:
+      - '120'
+      X-Apiary-Ratelimit-Remaining:
+      - '119'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - OPTIONS,GET,HEAD,POST,PUT,DELETE,TRACE,CONNECT
+      Access-Control-Expose-Headers:
+      - Content-Type
+      Access-Control-Max-Age:
+      - '10'
+      X-Apiary-Transaction-Id:
+      - 63e6403700888d008ad1cfa3
+      Date:
+      - Fri, 10 Feb 2023 13:01:43 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "workflows": [
+                {
+                    "code": 1,
+                    "utility_id": 1,
+                    "name": "Cambio de Titularidad",
+                    "header_keys": { "key": "value" }
+                },
+                {
+                    "code": 2,
+                    "utility_id": 1,
+                    "name": "Baja de Servicio",
+                    "header_keys": { "key": "value" }
+                },
+                {
+                    "code": 3,
+                    "utility_id": 1,
+                    "name": "Alta de Servicio",
+                    "header_keys": { "key": "value" }
+                }
+            ]
+        }
+    http_version: 
+  recorded_at: Fri, 10 Feb 2023 13:01:43 GMT
+recorded_with: VCR 4.0.0

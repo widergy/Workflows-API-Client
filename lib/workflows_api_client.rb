@@ -1,4 +1,5 @@
 require 'workflows_api_client/engine.rb'
+require 'workflows_api_client/methods.rb'
 
 module WorkflowsApiClient
   @config = {
