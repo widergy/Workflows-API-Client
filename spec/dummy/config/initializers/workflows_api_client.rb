@@ -1,17 +1,17 @@
 WorkflowsApiClient.configure do |config|
   # config.workflows_api_url It is required and should be the API Workflows url depending on the
   # environment you wish to configure. If it is not present an error will be thrown.
-  config.workflows_api_url = ''
+  config.workflows_api_url = 'https://private-720a83-workflowsapi1.apiary-mock.com/api/v1/'
 
   # config.consumer_api_key It is required and must be the api_key of the 'Consumer' created in API
   # Workflows according to the environment you want to configure. If it is not present an error
   # will be thrown.
-  config.consumer_api_key = ''
+  config.consumer_api_key = 'APPLICATION_API_KEY'
 
   # config.consumer_api_secret It is required and must be the 'api_secret' of the 'Consumer'
   # created in API Workflows according to the environment you want to configure. If it is not
   # present an error will be thrown.
-  config.consumer_api_secret = ''
+  config.consumer_api_secret = 'APPLICATION_API_SECRET'
 
   # config.async_request_helper Required, shall be the helper class that is included in
   # the controllers to make asynchronous calls to API Workflows 'AsyncRequest::ApplicationHelper'
