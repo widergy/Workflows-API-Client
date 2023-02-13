@@ -1,5 +1,7 @@
 module WorkflowsApiClient
   class BaseWorker
+    attr_accessor :params
+
     def initialize
       workflows_api_url = WorkflowsApiClient.config[:workflows_api_url]
       return if workflows_api_url.present?
@@ -12,6 +14,7 @@ module WorkflowsApiClient
     WORKFLOWS_RESPONSE_SERVICE_URL = 'workflow_responses'.freeze
 
     def execute(params)
+      @params = params
       perform(build_service(params))
     end
 
