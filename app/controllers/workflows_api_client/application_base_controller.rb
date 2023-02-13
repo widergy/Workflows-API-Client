@@ -1,5 +1,3 @@
-require 'rails'
-
 module WorkflowsApiClient
   class ApplicationBaseController < ControllerInheritanceHelper.inherit
     def request_headers
