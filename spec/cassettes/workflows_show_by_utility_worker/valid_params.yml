@@ -1,0 +1,78 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://private-720a83-workflowsapi1.apiary-mock.com/api/v1/workflows/test_code
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Utility-Id:
+      - '4'
+      Key:
+      - APPLICATION_API_KEY:1676298414
+      Digest:
+      - jFLmzIbPAa94WIvy3untMcwuZ6FiuAM2hINmhHOAT4w=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '566'
+      X-Apiary-Ratelimit-Limit:
+      - '120'
+      X-Apiary-Ratelimit-Remaining:
+      - '119'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - OPTIONS,GET,HEAD,POST,PUT,DELETE,TRACE,CONNECT
+      Access-Control-Expose-Headers:
+      - Content-Type
+      Access-Control-Max-Age:
+      - '10'
+      X-Apiary-Transaction-Id:
+      - 63ea48af66bb620080c5371e
+      Date:
+      - Mon, 13 Feb 2023 14:26:55 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "code": 1,
+            "utility_id": 1,
+            "name": "Cambio de Titularidad",
+            "header_keys": { "key": "value" },
+            "initial_step": {
+                "code": "initial_step_w_1",
+                "name": "Ingreso de NIS",
+                "type": "Steps::Input",
+                "form": {
+                    "fields": [
+                        {
+                            "field_options": []
+                        }
+                    ]
+                },
+                "can_cancel": false,
+                "can_edit": true,
+                "is_last_step_response": false,
+                "can_return": false,
+                "checkpoint": true,
+                "is_final": false
+            }
+        }
+    http_version: 
+  recorded_at: Mon, 13 Feb 2023 14:26:55 GMT
+recorded_with: VCR 4.0.0

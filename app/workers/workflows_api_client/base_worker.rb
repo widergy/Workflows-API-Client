@@ -1,5 +1,7 @@
 module WorkflowsApiClient
   class BaseWorker
+    attr_accessor :params
+
     def initialize
       workflows_api_url = WorkflowsApiClient.config[:workflows_api_url]
       return if workflows_api_url.present?
@@ -12,22 +14,23 @@ module WorkflowsApiClient
     WORKFLOWS_RESPONSE_SERVICE_URL = 'workflow_responses'.freeze
 
     def execute(params)
-      perform(build_service(params))
+      @params = params
+      perform
     end
 
     private
 
-    def perform(service)
-      response = WorkflowsApiClient::RequestPerformer.new(service).perform
+    def perform
+      response = WorkflowsApiClient::RequestPerformer.new(build_service).perform
       [response.code, response.body]
     end
 
-    def build_service(service_args)
+    def build_service
       {
-        body_params: service_args[:body_params],
-        headers: service_args[:headers],
-        query_params: service_args[:query_params],
-        uri_params: service_args[:uri_params]
+        body_params: params[:body_params],
+        headers: params[:headers],
+        query_params: params[:query_params],
+        uri_params: params[:uri_params]
       }.merge(service_params)
     end
   end

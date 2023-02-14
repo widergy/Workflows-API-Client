@@ -1,27 +1,35 @@
 require 'spec_helper'
 
-describe WorkflowsApiClient::WorkflowsIndexByUtilityWorker do
+describe WorkflowsApiClient::WorkflowsShowByUtilityWorker do
   let(:worker_instance) { described_class.new }
 
   describe '#execute' do
     let(:utility_id) { Faker::Number.between(from: 1, to: 10) }
+    let(:code) { 'test_code' }
+    let(:uri_params) { { code: code } }
     let(:params) do
-      { headers: { 'Utility-Id': utility_id.to_s } }
+      {
+        headers: { 'Utility-Id': utility_id.to_s },
+        uri_params: uri_params
+      }
     end
+    let(:base_url) { worker_instance.class::BASE_URL }
+    let(:workflows_url) { worker_instance.class::WORKFLOWS_SERVICE_URL }
+
     let(:expected_service) do
       {
         http_method: :get,
         body_params: nil,
         headers: { "Utility-Id": utility_id.to_s },
         query_params: nil,
-        uri_params: nil,
-        url: "#{worker_instance.class::BASE_URL}#{worker_instance.class::WORKFLOWS_SERVICE_URL}"
+        uri_params: uri_params,
+        url: "#{base_url}#{workflows_url}/#{code}"
       }.stringify_keys
     end
 
     context 'when the service responds properly' do
       subject(:execute_worker) do
-        VCR.use_cassette 'workflows_index_by_utility_worker/valid_params' do
+        VCR.use_cassette 'workflows_show_by_utility_worker/valid_params' do
           worker_instance.execute(params)
         end
       end
