@@ -19,7 +19,7 @@ describe WorkflowsApiClient::WorkflowsIndexByUtilityWorker do
       }.stringify_keys
     end
 
-    context 'when the service responds properly' do
+    context 'with successful response' do
       subject(:execute_worker) do
         VCR.use_cassette 'workflows_index_by_utility_worker/valid_params' do
           worker_instance.execute(params)
@@ -28,21 +28,21 @@ describe WorkflowsApiClient::WorkflowsIndexByUtilityWorker do
 
       before { worker_instance.params = params }
 
-      it_behaves_like 'builds the service properly'
-      it_behaves_like 'the worker response is successful'
+      it_behaves_like 'successful service build'
+      it_behaves_like 'successful worker response'
     end
 
-    context 'when the service responds with error' do
+    context 'when unsuccessful service response' do
       subject(:execute_worker) do
         worker_instance.execute(params)
       end
 
-      context 'when the service responds badly' do
-        it_behaves_like 'the worker response is failed'
+      context 'when the service response fails' do
+        it_behaves_like 'failed worker response'
       end
 
       context 'when an error occurs with the service' do
-        it_behaves_like 'the worker response is failed by error'
+        it_behaves_like 'unhandled error from worker response'
       end
     end
   end

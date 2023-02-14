@@ -15,11 +15,11 @@ describe WorkflowsApiClient::WorkflowsController, type: :controller do
         service
       end
 
-      it_behaves_like 'endpoint with polling and recovers headers of the request'
+      it_behaves_like 'endpoint with polling and request headers recovery'
     end
 
     context 'when Utility-Id header is not present' do
-      it_behaves_like 'validates the presence of the utility id header'
+      it_behaves_like 'utility id header validation'
     end
   end
 
@@ -33,11 +33,11 @@ describe WorkflowsApiClient::WorkflowsController, type: :controller do
         service
       end
 
-      it_behaves_like 'endpoint with polling and recovers headers of the request'
+      it_behaves_like 'endpoint with polling and request headers recovery'
     end
 
     context 'when Utility-Id header is not present' do
-      it_behaves_like 'validates the presence of the utility id header'
+      it_behaves_like 'utility id header validation'
     end
 
     context 'when code param is not present' do

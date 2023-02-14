@@ -1,4 +1,4 @@
-shared_examples 'the worker response is successful' do
+shared_examples 'successful worker response' do
   it 'return ok status' do
     expect(execute_worker.first).to eq(200)
   end
@@ -8,7 +8,7 @@ shared_examples 'the worker response is successful' do
   end
 end
 
-shared_examples 'the worker response is failed' do
+shared_examples 'failed worker response' do
   let(:response) do
     instance_double('HTTParty::Response', code: error_code, parsed_response: {},
                                           body: nil, headers: nil)
@@ -24,7 +24,7 @@ shared_examples 'the worker response is failed' do
   end
 end
 
-shared_examples 'the worker response is failed by error' do
+shared_examples 'unhandled error from worker response' do
   before do
     allow(HTTParty).to receive(:send).and_raise(Net::OpenTimeout)
   end

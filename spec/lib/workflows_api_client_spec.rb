@@ -24,7 +24,7 @@ describe WorkflowsApiClient do
     let(:method) { :workflows_index }
     let(:args) { [utility_id] }
 
-    it_behaves_like 'creates a new instance of the relevant worker'
+    it_behaves_like 'succesful instancing of worker'
   end
 
   describe '.workflows_show' do
@@ -33,7 +33,7 @@ describe WorkflowsApiClient do
     let(:method) { :workflows_show }
     let(:args) { [utility_id, code] }
 
-    it_behaves_like 'creates a new instance of the relevant worker'
+    it_behaves_like 'succesful instancing of worker'
   end
 
   describe '.show_params' do
@@ -50,7 +50,7 @@ describe WorkflowsApiClient do
     let(:method) { :workflow_responses_index }
     let(:args) { [utility_id, filter] }
 
-    it_behaves_like 'creates a new instance of the relevant worker'
+    it_behaves_like 'succesful instancing of worker'
   end
 
   describe '.index_response_params' do

@@ -14,7 +14,7 @@ module WorkflowsApiClient
     end
 
     def permitted_index_params
-      params.permit(:user_external_id, :account_external_id).to_h
+      params.permit(%i[user_external_id account_external_id]).to_h
     end
   end
 end
