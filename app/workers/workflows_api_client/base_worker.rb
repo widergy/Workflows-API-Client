@@ -1,11 +1,13 @@
 module WorkflowsApiClient
   class BaseWorker
-    workflows_api_url = WorkflowsApiClient.config[:workflows_api_url]
-    if workflows_api_url.blank?
+    def initialize
+      workflows_api_url = WorkflowsApiClient.config[:workflows_api_url]
+      return if workflows_api_url.present?
+
       raise WorkflowsApiClient::Exceptions::InvalidConfiguration, 'workflows_api_url'
     end
 
-    BASE_URL = workflows_api_url.freeze
+    BASE_URL = WorkflowsApiClient.config[:workflows_api_url].freeze
     WORKFLOWS_SERVICE_URL = 'workflows'.freeze
     WORKFLOWS_RESPONSE_SERVICE_URL = 'workflow_responses'.freeze
 
