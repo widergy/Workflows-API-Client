@@ -15,22 +15,22 @@ module WorkflowsApiClient
 
     def execute(params)
       @params = params
-      perform(build_service(params))
+      perform
     end
 
     private
 
-    def perform(service)
-      response = WorkflowsApiClient::RequestPerformer.new(service).perform
+    def perform
+      response = WorkflowsApiClient::RequestPerformer.new(build_service).perform
       [response.code, response.body]
     end
 
-    def build_service(service_args)
+    def build_service
       {
-        body_params: service_args[:body_params],
-        headers: service_args[:headers],
-        query_params: service_args[:query_params],
-        uri_params: service_args[:uri_params]
+        body_params: params[:body_params],
+        headers: params[:headers],
+        query_params: params[:query_params],
+        uri_params: params[:uri_params]
       }.merge(service_params)
     end
   end

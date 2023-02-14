@@ -8,14 +8,14 @@ module WorkflowsApiClient
     end
 
     def show
-      response = execute_async(WorkflowsShowByUtilityWorker, show_params)
+      response = execute_async(WorkflowsShowByUtilityWorker, add_headers(show_params))
       async_custom_response(response)
     end
 
     private
 
     def show_params
-      { uri_params: { code: params.require(:code) } }.merge(request_headers)
+      { uri_params: { code: params.require(:code) } }
     end
   end
 end
