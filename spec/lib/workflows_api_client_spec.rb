@@ -13,21 +13,19 @@ describe WorkflowsApiClient do
 
   describe '.workflows_index' do
     let(:worker_class) { WorkflowsApiClient::WorkflowsIndexByUtilityWorker }
+    let(:method) { :workflows_index }
+    let(:args) { [utility_id] }
 
-    it 'creates a new instance of WorkflowsIndexByUtilityWorker' do
-      expect(worker_class).to receive(:new).and_call_original
-      described_class.workflows_index(utility_id)
-    end
+    it_behaves_like 'creates a new instance of the relevant worker'
   end
 
   describe '.workflows_show' do
     let(:code) { 'test_code' }
     let(:worker_class) { WorkflowsApiClient::WorkflowsShowByUtilityWorker }
+    let(:method) { :workflows_show }
+    let(:args) { [utility_id, code] }
 
-    it 'creates a new instance of WorkflowsShowByUtilityWorker' do
-      expect(worker_class).to receive(:new).and_call_original
-      described_class.workflows_show(utility_id, code)
-    end
+    it_behaves_like 'creates a new instance of the relevant worker'
   end
 
   describe '.request_headers' do

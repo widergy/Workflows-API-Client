@@ -1,12 +1,16 @@
 module WorkflowsApiClient
   class ApplicationBaseController < ControllerInheritanceHelper.inherit
+    def async_custom_execute(worker_class, worker_params = {})
+      execute_async(worker_class, worker_params.merge(request_headers))
+    end
+
     def request_headers
       {
         headers: {
           'Utility-Id': utility_id,
           'Content-Type': request.headers['Content-Type']
         }
-      }
+      }.compact
     end
 
     def utility_id
@@ -14,10 +18,6 @@ module WorkflowsApiClient
       raise ActionController::ParameterMissing, 'Utility-ID header' if utility_header.blank?
 
       utility_header.to_s
-    end
-
-    def add_headers(service_params)
-      service_params.merge(request_headers)
     end
   end
 end

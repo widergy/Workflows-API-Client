@@ -53,9 +53,7 @@ describe WorkflowsApiClient::WorkflowsController, type: :controller do
       let(:code) { nil }
       let(:service) { get :show, params: { use_route: 'workflows/workflows/:code', code: code } }
 
-      before do
-        request.headers.merge(headers)
-      end
+      before { request.headers.merge(headers) }
 
       it 'raises ActionController::ParameterMissing exception' do
         expect { service }.to raise_error(ActionController::ParameterMissing)
