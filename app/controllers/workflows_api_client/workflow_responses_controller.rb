@@ -3,7 +3,7 @@ module WorkflowsApiClient
     include AsyncRequestHelper
 
     def index
-      response = execute_async(WorkflowResponsesIndexByUtilityWorker, add_headers(index_params))
+      response = async_custom_execute(WorkflowResponsesIndexByUtilityWorker, index_params)
       async_custom_response(response)
     end
 

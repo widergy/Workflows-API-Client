@@ -28,18 +28,14 @@ describe WorkflowsApiClient::WorkflowResponsesIndexByUtilityWorker do
         end
       end
 
-      before do
-        worker_instance.params = params
-      end
+      before { worker_instance.params = params }
 
       it_behaves_like 'builds the service properly'
       it_behaves_like 'the worker response is successful'
     end
 
     context 'when the service responds with error' do
-      subject(:execute_worker) do
-        worker_instance.execute(params)
-      end
+      subject(:execute_worker) { worker_instance.execute(params) }
 
       context 'when the service responds badly' do
         it_behaves_like 'the worker response is failed'

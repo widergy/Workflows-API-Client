@@ -3,7 +3,7 @@ require 'spec_helper'
 describe WorkflowsApiClient::WorkflowsController, type: :controller do
   let(:utility_id) { Faker::Number.between(from: 1, to: 10) }
   let(:headers) do
-    { 'Utility-Id': utility_id.to_s, 'Content-Type': nil }
+    { 'Utility-Id': utility_id.to_s }
   end
 
   describe 'GET #index' do

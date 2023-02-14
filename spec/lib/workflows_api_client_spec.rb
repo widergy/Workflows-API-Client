@@ -38,30 +38,26 @@ describe WorkflowsApiClient do
 
   describe '.show_params' do
     let(:code) { 'test_code' }
-    let(:show_params) { described_class.show_params(utility_id, code) }
+    let(:service_params) { described_class.show_params(utility_id, code) }
     let(:expected_params) { { uri_params: { code: code } }.merge(expected_headers) }
 
-    it 'returns the expected show params' do
-      expect(show_params).to eq(expected_params)
-    end
+    it_behaves_like 'returns the expected service response params'
   end
 
   describe '.workflow_responses_index' do
     let(:filter) { { some_filter: 'some_filter' } }
+    let(:worker_class) { WorkflowsApiClient::WorkflowResponsesIndexByUtilityWorker }
+    let(:method) { :workflow_responses_index }
+    let(:args) { [utility_id, filter] }
 
-    it 'creates a new instance of WorkflowsShowByUtilityWorker' do
-      expect(WorkflowsApiClient::WorkflowsShowByUtilityWorker).to receive(:new).and_call_original
-      described_class.workflows_show(utility_id, filter)
-    end
+    it_behaves_like 'creates a new instance of the relevant worker'
   end
 
   describe '.index_response_params' do
     let(:filter) { { some_filter: 'some_filter' } }
-    let(:index_response_params) { described_class.index_response_params(utility_id, filter) }
+    let(:service_params) { described_class.index_response_params(utility_id, filter) }
     let(:expected_params) { { query_params: filter }.merge(expected_headers) }
 
-    it 'returns the expected index response params' do
-      expect(index_response_params).to eq(expected_params)
-    end
+    it_behaves_like 'returns the expected service response params'
   end
 end
