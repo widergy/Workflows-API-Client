@@ -15,5 +15,9 @@ module WorkflowsApiClient
 
       utility_header.to_s
     end
+
+    def add_headers(service_params)
+      service_params.merge(request_headers)
+    end
   end
 end

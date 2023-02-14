@@ -26,6 +26,10 @@ describe WorkflowsApiClient::WorkflowsIndexByUtilityWorker do
         end
       end
 
+      before do
+        worker_instance.params = params
+      end
+
       it_behaves_like 'builds the service properly'
       it_behaves_like 'the worker response is successful'
     end
