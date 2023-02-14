@@ -8,4 +8,8 @@ module WorkflowsApiClient
   def self.workflows_show(utility_id, code)
     WorkflowsShowByUtilityWorker.new.execute(show_params(utility_id, code))
   end
+
+  def self.workflow_responses_index(utility_id, filters = nil)
+    WorkflowResponsesIndexByUtilityWorker.new.execute(index_response_params(utility_id, filters))
+  end
 end
