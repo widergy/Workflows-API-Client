@@ -28,7 +28,7 @@ describe WorkflowsApiClient do
   end
 
   describe '.workflows_show' do
-    let(:code) { 'test_code' }
+    let(:code) { { test_code: 'code' } }
     let(:worker_class) { WorkflowsApiClient::WorkflowsShowByUtilityWorker }
     let(:method) { :workflows_show }
     let(:args) { [utility_id, code] }
@@ -37,9 +37,9 @@ describe WorkflowsApiClient do
   end
 
   describe '.show_params' do
-    let(:code) { 'test_code' }
-    let(:service_params) { described_class.show_params(utility_id, code) }
-    let(:expected_params) { { uri_params: { code: code } }.merge(expected_headers) }
+    let(:show_params) { { test: 123 } }
+    let(:service_params) { described_class.show_params(utility_id, show_params) }
+    let(:expected_params) { { uri_params: show_params }.merge(expected_headers) }
 
     it_behaves_like 'returns the expected service response params'
   end
@@ -59,5 +59,14 @@ describe WorkflowsApiClient do
     let(:expected_params) { { query_params: filter }.merge(expected_headers) }
 
     it_behaves_like 'returns the expected service response params'
+  end
+
+  describe '.workflow_responses_show' do
+    let(:id) { Faker::Number.between(from: 1, to: 5) }
+    let(:worker_class) { WorkflowsApiClient::WorkflowResponsesShowByUtilityWorker }
+    let(:method) { :workflow_responses_show }
+    let(:args) { [utility_id, id] }
+
+    it_behaves_like 'successful instancing of worker'
   end
 end

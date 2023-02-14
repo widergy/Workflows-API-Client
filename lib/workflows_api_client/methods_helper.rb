@@ -8,8 +8,8 @@ module WorkflowsApiClient
     }
   end
 
-  def self.show_params(utility_id, code)
-    add_headers({ uri_params: { code: code } }, utility_id)
+  def self.show_params(utility_id, show_param)
+    add_headers({ uri_params: show_param }, utility_id)
   end
 
   def self.index_response_params(utility_id, filters)

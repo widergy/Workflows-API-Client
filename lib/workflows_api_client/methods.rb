@@ -12,4 +12,8 @@ module WorkflowsApiClient
   def self.workflow_responses_index(utility_id, filters = nil)
     WorkflowResponsesIndexByUtilityWorker.new.execute(index_response_params(utility_id, filters))
   end
+
+  def self.workflow_responses_show(utility_id, id)
+    WorkflowResponsesShowByUtilityWorker.new.execute(show_params(utility_id, { id: id }))
+  end
 end
