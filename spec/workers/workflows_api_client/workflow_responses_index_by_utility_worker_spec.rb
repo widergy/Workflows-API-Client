@@ -1,35 +1,29 @@
 require 'spec_helper'
 
-describe WorkflowsApiClient::WorkflowsShowByUtilityWorker do
+describe WorkflowsApiClient::WorkflowResponsesIndexByUtilityWorker do
   let(:worker_instance) { described_class.new }
 
   describe '#execute' do
     let(:utility_id) { Faker::Number.between(from: 1, to: 10) }
-    let(:code) { 'test_code' }
-    let(:uri_params) { { code: code } }
-    let(:params) do
-      {
-        headers: { 'Utility-Id': utility_id.to_s },
-        uri_params: uri_params
-      }
-    end
+    let(:query_params) { { user_external_id: 2 } }
+    let(:utility_id_header) { { 'Utility-Id': utility_id.to_s } }
+    let(:params) { { headers: utility_id_header, query_params: query_params } }
     let(:base_url) { worker_instance.class::BASE_URL }
-    let(:workflows_url) { worker_instance.class::WORKFLOWS_SERVICE_URL }
-
+    let(:workflows_url) { worker_instance.class::WORKFLOW_RESPONSES_SERVICE_URL }
     let(:expected_service) do
       {
         http_method: :get,
         body_params: nil,
-        headers: { "Utility-Id": utility_id.to_s },
-        query_params: nil,
-        uri_params: uri_params,
-        url: "#{base_url}#{workflows_url}/#{code}"
+        headers: utility_id_header,
+        query_params: query_params,
+        uri_params: nil,
+        url: base_url + workflows_url
       }.stringify_keys
     end
 
     context 'with successful response' do
       subject(:execute_worker) do
-        VCR.use_cassette 'workflows_show_by_utility_worker/valid_params' do
+        VCR.use_cassette 'workflow_responses_index_by_utility_worker/valid_params' do
           worker_instance.execute(params)
         end
       end
@@ -41,9 +35,7 @@ describe WorkflowsApiClient::WorkflowsShowByUtilityWorker do
     end
 
     context 'when service response is unsuccessful' do
-      subject(:execute_worker) do
-        worker_instance.execute(params)
-      end
+      subject(:execute_worker) { worker_instance.execute(params) }
 
       context 'when the service response fails' do
         it_behaves_like 'failed worker response'

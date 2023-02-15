@@ -9,6 +9,14 @@ module WorkflowsApiClient
   end
 
   def self.show_params(utility_id, code)
-    { uri_params: { code: code } }.merge(request_headers(utility_id))
+    add_headers({ uri_params: { code: code } }, utility_id)
+  end
+
+  def self.index_response_params(utility_id, filters)
+    add_headers({ query_params: filters }, utility_id)
+  end
+
+  def self.add_headers(service_params, utility_id)
+    service_params.merge(request_headers(utility_id))
   end
 end

@@ -1,5 +1,5 @@
-shared_examples 'endpoint with polling and recovers headers of the request' do
-  it 'recover headers of the request successfully' do
+shared_examples 'endpoint with polling and request headers recovery' do
+  it 'recovers the request headers successfully' do
     expect(controller.request_headers[:headers]).to eq(headers)
   end
 
