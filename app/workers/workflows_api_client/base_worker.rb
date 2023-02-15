@@ -27,11 +27,15 @@ module WorkflowsApiClient
 
     def build_service
       {
-        body_params: params[:body_params],
+        body_params: evaluate_body_params,
         headers: params[:headers],
         query_params: params[:query_params],
         uri_params: params[:uri_params]
       }.merge(service_params)
+    end
+
+    def evaluate_body_params
+      params[:body_params].present? ? params[:body_params].to_json : nil
     end
   end
 end

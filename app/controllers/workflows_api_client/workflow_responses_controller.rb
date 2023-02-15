@@ -12,6 +12,11 @@ module WorkflowsApiClient
       async_custom_response(response)
     end
 
+    def create
+      response = async_custom_execute(WorkflowResponsesCreateByUtilityWorker, create_params)
+      async_custom_response(response)
+    end
+
     private
 
     def index_params
@@ -22,8 +27,17 @@ module WorkflowsApiClient
       { uri_params: { id: params.require(:id) } }
     end
 
+    def create_params
+      { body_params: permitted_create_params.to_h }
+    end
+
     def permitted_index_params
       params.permit(%i[user_external_id account_external_id]).to_h
+    end
+
+    def permitted_create_params
+      params.require(%i[workflow_code input_values])
+      params.permit(:workflow_code, input_values: {})
     end
   end
 end

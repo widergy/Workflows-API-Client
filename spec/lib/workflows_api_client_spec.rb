@@ -69,4 +69,54 @@ describe WorkflowsApiClient do
 
     it_behaves_like 'successful instancing of worker'
   end
+
+  describe '.workflow_responses_create' do
+    let(:workflow_code) { Faker::Number.between(from: 1, to: 5) }
+    let(:input_values) { { key: 'test' } }
+    let(:worker_class) { WorkflowsApiClient::WorkflowResponsesCreateByUtilityWorker }
+    let(:method) { :workflow_responses_create }
+    let(:args) { [utility_id, workflow_code, input_values] }
+
+    it_behaves_like 'successful instancing of worker'
+  end
+
+  describe '.create_params' do
+    let(:workflow_code) { 12 }
+    let(:input_values) { { key: 'test' } }
+    let(:service_params) { described_class.create_params(utility_id, workflow_code, input_values) }
+    let(:expected_params) do
+      {
+        body_params: { workflow_code: workflow_code, input_values: input_values }
+      }.merge(expected_headers)
+    end
+
+    it_behaves_like 'returns the expected service response params'
+  end
+
+  describe '.build_body_params' do
+    let(:build_body_params) { described_class.build_body_params(workflow_code, input_values) }
+    let(:input_values) { { key: 'test' } }
+
+    context 'when workflow_code is present' do
+      let(:workflow_code) { 12 }
+      let(:expected_body) do
+        {
+          body_params: { workflow_code: workflow_code, input_values: input_values }
+        }
+      end
+
+      it 'returns the expected body' do
+        expect(build_body_params).to eq(expected_body)
+      end
+    end
+
+    context 'when workflow_code is not present' do
+      let(:workflow_code) { nil }
+      let(:expected_body) { { body_params: { input_values: input_values } } }
+
+      it 'returns the expected body' do
+        expect(build_body_params).to eq(expected_body)
+      end
+    end
+  end
 end

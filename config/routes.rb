@@ -1,7 +1,4 @@
 WorkflowsApiClient::Engine.routes.draw do
-  get 'workflows', to: 'workflows#index'
-  get 'workflows/:code', to: 'workflows#show'
-
-  get 'workflow_responses', to: 'workflow_responses#index'
-  get 'workflow_responses/:id', to: 'workflow_responses#show'
+  resources :workflows, only: %i[index show], param: :code
+  resources :workflow_responses, only: %i[index show create]
 end

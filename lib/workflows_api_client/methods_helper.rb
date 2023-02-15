@@ -16,6 +16,14 @@ module WorkflowsApiClient
     add_headers({ query_params: filters }, utility_id)
   end
 
+  def self.create_params(utility_id, workflow_code, input_values)
+    add_headers(build_body_params(workflow_code, input_values), utility_id)
+  end
+
+  def self.build_body_params(workflow_code = nil, input_values)
+    { body_params: { workflow_code: workflow_code, input_values: input_values }.compact }
+  end
+
   def self.add_headers(service_params, utility_id)
     service_params.merge(request_headers(utility_id))
   end

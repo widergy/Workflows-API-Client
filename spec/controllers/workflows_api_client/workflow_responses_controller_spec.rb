@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
   let(:utility_id) { Faker::Number.between(from: 1, to: 10) }
-  let(:headers) do
-    { 'Utility-Id': utility_id.to_s }
-  end
+  let(:headers) { { 'Utility-Id': utility_id.to_s } }
 
   describe 'GET #index' do
     let(:service) { get :index, params: { use_route: 'workflows/workflow_responses' } }
@@ -19,7 +17,7 @@ describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
     end
 
     context 'when Utility-Id header is not present' do
-      it_behaves_like 'utility id header validation'
+      it_behaves_like 'responds with the exception of missing parameters'
     end
   end
 
@@ -39,7 +37,7 @@ describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
     end
 
     context 'when Utility-Id header is not present' do
-      it_behaves_like 'utility id header validation'
+      it_behaves_like 'responds with the exception of missing parameters'
     end
 
     context 'when id param is not present' do
@@ -50,6 +48,39 @@ describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
       it 'raises ActionController::ParameterMissing exception' do
         expect { service }.to raise_error(ActionController::ParameterMissing)
       end
+    end
+  end
+
+  describe 'POST #create' do
+    let(:service) do
+      post :create, params: {
+        use_route: 'workflows/workflow_responses', workflow_code: workflow_code,
+        input_values: input_values
+      }
+    end
+    let(:headers) { { 'Utility-Id': utility_id.to_s, 'Content-Type': 'application/json' } }
+    let(:input_values) { { key: 'value' } }
+    let(:workflow_code) { 1 }
+
+    context 'when parameters are valid' do
+      context 'when calling the appropriate worker' do
+        before do
+          request.headers.merge(headers)
+          service
+        end
+
+        it_behaves_like 'endpoint with polling and request headers recovery'
+      end
+    end
+
+    context 'when parameters are invalid' do
+      let(:workflow_code) { nil }
+
+      it_behaves_like 'responds with the exception of missing parameters'
+    end
+
+    context 'when Utility-Id header is not present' do
+      it_behaves_like 'responds with the exception of missing parameters'
     end
   end
 end
