@@ -27,7 +27,7 @@ module WorkflowsApiClient
 
     def build_service
       {
-        body_params: params[:body_params],
+        body_params: params[:body_params]&.to_json,
         headers: params[:headers],
         query_params: params[:query_params],
         uri_params: params[:uri_params]

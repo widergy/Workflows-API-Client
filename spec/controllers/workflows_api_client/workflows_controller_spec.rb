@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe WorkflowsApiClient::WorkflowsController, type: :controller do
   let(:utility_id) { Faker::Number.between(from: 1, to: 10) }
-  let(:headers) do
-    { 'Utility-Id': utility_id.to_s }
-  end
+  let(:headers) { { 'Utility-Id': utility_id.to_s } }
 
   describe 'GET #index' do
     let(:service) { get :index, params: { use_route: 'workflows/workflows' } }
@@ -19,7 +17,7 @@ describe WorkflowsApiClient::WorkflowsController, type: :controller do
     end
 
     context 'when Utility-Id header is not present' do
-      it_behaves_like 'utility id header validation'
+      it_behaves_like 'responds with the exception of missing parameters'
     end
   end
 
@@ -37,7 +35,7 @@ describe WorkflowsApiClient::WorkflowsController, type: :controller do
     end
 
     context 'when Utility-Id header is not present' do
-      it_behaves_like 'utility id header validation'
+      it_behaves_like 'responds with the exception of missing parameters'
     end
 
     context 'when code param is not present' do
