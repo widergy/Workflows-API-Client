@@ -74,7 +74,7 @@ describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
     end
 
     context 'when parameters are invalid' do
-      let(:workflow_code) { nil }
+      let(%i[workflow_code input_values].sample) { nil }
 
       it_behaves_like 'responds with the exception of missing parameters'
     end
