@@ -5,7 +5,17 @@ describe WorkflowsApiClient::WorkflowResponsesCreateByUtilityWorker do
 
   describe '#execute' do
     let(:utility_id) { Faker::Number.between(from: 1, to: 10) }
-    let(:body_params) { { workflow_code: 1, input_values: { key: 'value' } } }
+    let(:user_external_id) { 11 }
+    let(:account_external_id) { 22 }
+    let(:workflow_code) { 1 }
+    let(:body_params) do
+      {
+        workflow_code: workflow_code,
+        user_external_id: user_external_id,
+        account_external_id: account_external_id,
+        input_values: { key: 'value' }
+      }
+    end
     let(:headers) { { 'Utility-Id': utility_id.to_s, 'Content-Type': 'application/json' } }
     let(:params) { { headers: headers, body_params: body_params } }
     let(:base_url) { worker_instance.class::BASE_URL }

@@ -22,7 +22,7 @@ describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
   end
 
   describe 'GET #show' do
-    let(:id) { 9 }
+    let(:id) { Faker::Number.between(from: 1, to: 10) }
     let(:service) do
       get :show, params: { use_route: 'workflows/workflow_responses/:id', id: id }
     end
@@ -55,12 +55,15 @@ describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
     let(:service) do
       post :create, params: {
         use_route: 'workflows/workflow_responses', workflow_code: workflow_code,
-        input_values: input_values
+        input_values: input_values, user_external_id: user_external_id,
+        account_external_id: account_external_id
       }
     end
     let(:headers) { { 'Utility-Id': utility_id.to_s, 'Content-Type': 'application/json' } }
     let(:input_values) { { key: 'value' } }
-    let(:workflow_code) { 1 }
+    let(:workflow_code) { Faker::Number.between(from: 1, to: 10) }
+    let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
+    let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
 
     context 'when parameters are valid' do
       context 'when calling the appropriate worker' do
@@ -92,7 +95,7 @@ describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
     end
     let(:headers) { { 'Utility-Id': utility_id.to_s, 'Content-Type': 'application/json' } }
     let(:input_values) { { key: 'value' } }
-    let(:id) { 1 }
+    let(:id) { Faker::Number.between(from: 1, to: 10) }
 
     context 'when parameters are valid' do
       context 'when calling the appropriate worker' do

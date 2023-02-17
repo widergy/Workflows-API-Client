@@ -5,14 +5,16 @@ http_interactions:
     uri: https://private-720a83-workflowsapi1.apiary-mock.com/api/v1/workflow_responses
     body:
       encoding: UTF-8
-      string: workflow_code=1&input_values%5Bkey%5D=value
+      string: '{"workflow_code":1,"user_external_id":11,"account_external_id":22,"input_values":{"key":"value"}}'
     headers:
       Utility-Id:
-      - '6'
+      - '1'
+      Content-Type:
+      - application/json
       Key:
-      - APPLICATION_API_KEY:1676469530
+      - APPLICATION_API_KEY:1676667914
       Digest:
-      - hkJIDJ8b65Nm1iVz8ZzN9PiSQvrv7DQOuwFKtu8P650=
+      - mbuKJwiM3s2Ut+qYinCkLwguukvs+6FAc0k/qW6PZGU=
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -41,9 +43,9 @@ http_interactions:
       Access-Control-Max-Age:
       - '10'
       X-Apiary-Transaction-Id:
-      - 63ece51a00888d008adfbdaa
+      - 63efec0bab66840077056dfd
       Date:
-      - Wed, 15 Feb 2023 13:58:50 GMT
+      - Fri, 17 Feb 2023 21:05:15 GMT
       Connection:
       - keep-alive
     body:
@@ -76,5 +78,5 @@ http_interactions:
             }
         }
     http_version: 
-  recorded_at: Wed, 15 Feb 2023 13:58:50 GMT
+  recorded_at: Fri, 17 Feb 2023 21:05:15 GMT
 recorded_with: VCR 4.0.0
