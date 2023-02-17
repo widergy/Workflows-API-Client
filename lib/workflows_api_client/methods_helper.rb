@@ -20,6 +20,16 @@ module WorkflowsApiClient
     add_headers(build_body_params(workflow_code, input_values), utility_id)
   end
 
+  def self.update_params(utility_id, workflow_response_id, input_values)
+    add_headers(build_update_params(workflow_response_id, input_values), utility_id)
+  end
+
+  def self.build_update_params(workflow_response_id, input_values)
+    build_body_params(input_values).merge(
+      { uri_params: { id: workflow_response_id } }
+    )
+  end
+
   def self.build_body_params(workflow_code = nil, input_values)
     { body_params: { workflow_code: workflow_code, input_values: input_values }.compact }
   end
