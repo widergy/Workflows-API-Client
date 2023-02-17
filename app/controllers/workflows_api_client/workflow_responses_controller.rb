@@ -8,7 +8,7 @@ module WorkflowsApiClient
     end
 
     def show
-      response = async_custom_execute(WorkflowResponsesShowByUtilityWorker, show_params)
+      response = async_custom_execute(WorkflowResponsesShowByUtilityWorker, id_uri_params)
       async_custom_response(response)
     end
 
@@ -22,13 +22,18 @@ module WorkflowsApiClient
       async_custom_response(response)
     end
 
+    def destroy
+      response = async_custom_execute(WorkflowResponsesDestroyByUtilityWorker, id_uri_params)
+      async_custom_response(response)
+    end
+
     private
 
     def index_params
       { query_params: permitted_index_params }
     end
 
-    def show_params
+    def id_uri_params
       { uri_params: { id: params.require(:id) } }
     end
 
