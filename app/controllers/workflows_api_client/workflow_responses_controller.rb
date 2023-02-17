@@ -43,8 +43,10 @@ module WorkflowsApiClient
 
     def update_params
       update_params_hash = permitted_update_params.to_h
-      { body_params: { input_values: update_params_hash[:input_values] },
-        uri_params: { id: update_params_hash[:id] } }
+      {
+        body_params: { input_values: update_params_hash[:input_values] },
+        uri_params: { id: update_params_hash[:id] }
+      }
     end
 
     def permitted_index_params
