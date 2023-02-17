@@ -83,4 +83,36 @@ describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
       it_behaves_like 'responds with the exception of missing parameters'
     end
   end
+
+  describe 'PUT #update' do
+    let(:service) do
+      put :update, params: {
+        use_route: 'workflows/workflow_responses/:id', id: id, input_values: input_values
+      }
+    end
+    let(:headers) { { 'Utility-Id': utility_id.to_s, 'Content-Type': 'application/json' } }
+    let(:input_values) { { key: 'value' } }
+    let(:id) { 1 }
+
+    context 'when parameters are valid' do
+      context 'when calling the appropriate worker' do
+        before do
+          request.headers.merge(headers)
+          service
+        end
+
+        it_behaves_like 'endpoint with polling and request headers recovery'
+      end
+    end
+
+    context 'when parameters are invalid' do
+      let(%i[id input_values].sample) { nil }
+
+      it_behaves_like 'responds with the exception of missing parameters'
+    end
+
+    context 'when Utility-Id header is not present' do
+      it_behaves_like 'responds with the exception of missing parameters'
+    end
+  end
 end

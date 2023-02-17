@@ -119,4 +119,48 @@ describe WorkflowsApiClient do
       end
     end
   end
+
+  describe '.workflow_responses_update' do
+    let(:workflow_response_id) { Faker::Number.between(from: 1, to: 5) }
+    let(:input_values) { { key: 'test' } }
+    let(:worker_class) { WorkflowsApiClient::WorkflowResponsesUpdateByUtilityWorker }
+    let(:method) { :workflow_responses_update }
+    let(:args) { [utility_id, workflow_response_id, input_values] }
+
+    it_behaves_like 'successful instancing of worker'
+  end
+
+  describe '.update_params' do
+    let(:workflow_response_id) { 1 }
+    let(:input_values) { { key: 'test' } }
+    let(:service_params) do
+      described_class.update_params(utility_id, workflow_response_id, input_values)
+    end
+    let(:expected_params) do
+      {
+        body_params: { input_values: input_values },
+        uri_params: { id: workflow_response_id }
+      }.merge(expected_headers)
+    end
+
+    it_behaves_like 'returns the expected service response params'
+  end
+
+  describe '.build_update_params' do
+    let(:build_update_params) do
+      described_class.build_update_params(workflow_response_id, input_values)
+    end
+    let(:input_values) { { key: 'test' } }
+    let(:workflow_response_id) { 1 }
+    let(:expected_result) do
+      {
+        body_params: { input_values: input_values },
+        uri_params: { id: workflow_response_id }
+      }
+    end
+
+    it 'returns the expected body' do
+      expect(build_update_params).to eq(expected_result)
+    end
+  end
 end

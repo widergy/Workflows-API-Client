@@ -22,4 +22,10 @@ module WorkflowsApiClient
       create_params(utility_id, workflow_code, input_values)
     )
   end
+
+  def self.workflow_responses_update(utility_id, workflow_response_id, input_values)
+    WorkflowResponsesUpdateByUtilityWorker.new.execute(
+      update_params(utility_id, workflow_response_id, input_values)
+    )
+  end
 end

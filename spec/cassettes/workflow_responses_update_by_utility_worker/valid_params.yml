@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://private-720a83-workflowsapi1.apiary-mock.com/api/v1/workflow_responses/1
+    body:
+      encoding: UTF-8
+      string: '{"input_values":{"key":"value"}}'
+    headers:
+      Utility-Id:
+      - '8'
+      Content-Type:
+      - application/json
+      Key:
+      - APPLICATION_API_KEY:1676580532
+      Digest:
+      - fImBYQsOk6LfdZGx7M3G1qtjR1OndL4Ks4jDnQXLlL4=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '625'
+      X-Apiary-Ratelimit-Limit:
+      - '120'
+      X-Apiary-Ratelimit-Remaining:
+      - '118'
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - OPTIONS,GET,HEAD,POST,PUT,DELETE,TRACE,CONNECT
+      Access-Control-Expose-Headers:
+      - Content-Type
+      Access-Control-Max-Age:
+      - '10'
+      X-Apiary-Transaction-Id:
+      - 63ee96b50be2de008d86f976
+      Date:
+      - Thu, 16 Feb 2023 20:48:53 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "{\n    \"id\": 1,\n    \"workflow_code\": 1,\n    \"state\": \"in_progress\",\n
+        \   \"context\": { \"key\": \"value\" },\n    \"current_input_values\": {},\n
+        \   \"step_responses_count\": 4,\n    \"total_step_responses_count\": 6,\n
+        \   \"current_step\": {\n        \"code\": \"third_step_w_1\",\n        \"name\":
+        \"Pago de Deudas\",\n        \"form\": {\n            \"fields\": [\n                {\n
+        \                   \"field_options\": []\n                }\n            ]\n
+        \       },\n        \"can_cancel\": false,\n        \"can_edit\": true,\n
+        \       \"is_last_step_response\": false,\n        \"can_return\": false,\n
+        \       \"checkpoint\": true,\n        \"is_final\": false\n    }\n}     "
+    http_version: 
+  recorded_at: Thu, 16 Feb 2023 20:48:53 GMT
+recorded_with: VCR 4.0.0
