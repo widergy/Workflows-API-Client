@@ -10,6 +10,11 @@ describe WorkflowsApiClient do
       }
     }
   end
+  let(:workflow_code) { Faker::Number.between(from: 1, to: 5) }
+  let(:input_values) { { key: 'test' } }
+  let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
+  let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
+  let(:workflow_response_id) { Faker::Number.between(from: 1, to: 5) }
 
   describe '.request_headers' do
     let(:headers) { described_class.request_headers(utility_id) }
@@ -62,19 +67,14 @@ describe WorkflowsApiClient do
   end
 
   describe '.workflow_responses_show' do
-    let(:id) { Faker::Number.between(from: 1, to: 5) }
     let(:worker_class) { WorkflowsApiClient::WorkflowResponsesShowByUtilityWorker }
     let(:method) { :workflow_responses_show }
-    let(:args) { [utility_id, id] }
+    let(:args) { [utility_id, workflow_response_id] }
 
     it_behaves_like 'successful instancing of worker'
   end
 
   describe '.workflow_responses_create' do
-    let(:workflow_code) { Faker::Number.between(from: 1, to: 5) }
-    let(:input_values) { { key: 'test' } }
-    let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
-    let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
     let(:worker_class) { WorkflowsApiClient::WorkflowResponsesCreateByUtilityWorker }
     let(:method) { :workflow_responses_create }
     let(:args) { [utility_id, workflow_code, input_values, user_external_id, account_external_id] }
@@ -86,10 +86,6 @@ describe WorkflowsApiClient do
     let(:service_params) do
       described_class.create_params(utility_id, workflow_code, input_values, external_params)
     end
-    let(:workflow_code) { Faker::Number.between(from: 1, to: 10) }
-    let(:input_values) { { key: 'test' } }
-    let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
-    let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
     let(:external_params) { [user_external_id, account_external_id] }
     let(:expected_params) do
       {
@@ -107,12 +103,8 @@ describe WorkflowsApiClient do
     let(:build_body_params) do
       described_class.build_body_params(workflow_code, external_params, input_values)
     end
-    let(:input_values) { { key: 'test' } }
 
     context 'when all params are present' do
-      let(:workflow_code) { Faker::Number.between(from: 1, to: 10) }
-      let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
-      let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
       let(:external_params) { [user_external_id, account_external_id] }
       let(:expected_body) do
         {
@@ -142,8 +134,6 @@ describe WorkflowsApiClient do
     end
 
     context 'when user_external_id is not present' do
-      let(:workflow_code) { Faker::Number.between(from: 1, to: 10) }
-      let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
       let(:external_params) { [nil, account_external_id] }
       let(:expected_body) do
         {
@@ -160,8 +150,6 @@ describe WorkflowsApiClient do
     end
 
     context 'when account_external_id is not present' do
-      let(:workflow_code) { Faker::Number.between(from: 1, to: 10) }
-      let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
       let(:external_params) { [user_external_id, nil] }
       let(:expected_body) do
         {
@@ -179,8 +167,6 @@ describe WorkflowsApiClient do
   end
 
   describe '.workflow_responses_update' do
-    let(:workflow_response_id) { Faker::Number.between(from: 1, to: 5) }
-    let(:input_values) { { key: 'test' } }
     let(:worker_class) { WorkflowsApiClient::WorkflowResponsesUpdateByUtilityWorker }
     let(:method) { :workflow_responses_update }
     let(:args) { [utility_id, workflow_response_id, input_values] }
@@ -189,8 +175,6 @@ describe WorkflowsApiClient do
   end
 
   describe '.update_params' do
-    let(:workflow_response_id) { 1 }
-    let(:input_values) { { key: 'test' } }
     let(:service_params) do
       described_class.update_params(utility_id, workflow_response_id, input_values)
     end
@@ -208,8 +192,6 @@ describe WorkflowsApiClient do
     let(:build_update_params) do
       described_class.build_update_params(workflow_response_id, input_values)
     end
-    let(:input_values) { { key: 'test' } }
-    let(:workflow_response_id) { 1 }
     let(:expected_result) do
       {
         body_params: { input_values: input_values },
