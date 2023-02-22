@@ -115,4 +115,35 @@ describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
       it_behaves_like 'responds with the exception of missing parameters'
     end
   end
+
+  describe 'DELETE #destroy' do
+    let(:id) { 9 }
+    let(:service) do
+      delete :destroy, params: { use_route: 'workflows/workflow_responses/:id', id: id }
+    end
+    let(:headers) { { 'Utility-Id': utility_id.to_s, 'Content-Type': 'application/json' } }
+
+    context 'when calling the appropriate worker' do
+      before do
+        request.headers.merge(headers)
+        service
+      end
+
+      it_behaves_like 'endpoint with polling and request headers recovery'
+    end
+
+    context 'when Utility-Id header is not present' do
+      it_behaves_like 'responds with the exception of missing parameters'
+    end
+
+    context 'when id param is not present' do
+      let(:id) { nil }
+
+      before { request.headers.merge(headers) }
+
+      it 'raises ActionController::ParameterMissing exception' do
+        expect { service }.to raise_error(ActionController::ParameterMissing)
+      end
+    end
+  end
 end
