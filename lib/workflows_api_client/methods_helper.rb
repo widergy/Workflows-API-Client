@@ -30,12 +30,12 @@ module WorkflowsApiClient
     )
   end
 
-  def self.build_body_params(workflow_code = nil, external_params = {}, input_values)
+  def self.build_body_params(workflow_code = nil, external_params = [], input_values)
+    user_external_id, account_external_id = external_params
     {
       body_params: {
         workflow_code: workflow_code, input_values: input_values,
-        user_external_id: external_params[:user_external_id],
-        account_external_id: external_params[:account_external_id]
+        user_external_id: user_external_id, account_external_id: account_external_id
       }.compact
     }
   end

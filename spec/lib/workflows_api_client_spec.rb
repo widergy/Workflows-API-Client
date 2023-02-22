@@ -73,15 +73,11 @@ describe WorkflowsApiClient do
   describe '.workflow_responses_create' do
     let(:workflow_code) { Faker::Number.between(from: 1, to: 5) }
     let(:input_values) { { key: 'test' } }
-    let(:external_params) do
-      {
-        user_external_id: Faker::Number.between(from: 1, to: 10),
-        account_external_id: Faker::Number.between(from: 1, to: 10)
-      }
-    end
+    let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
+    let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
     let(:worker_class) { WorkflowsApiClient::WorkflowResponsesCreateByUtilityWorker }
     let(:method) { :workflow_responses_create }
-    let(:args) { [utility_id, workflow_code, input_values, external_params] }
+    let(:args) { [utility_id, workflow_code, input_values, user_external_id, account_external_id] }
 
     it_behaves_like 'successful instancing of worker'
   end
@@ -92,18 +88,14 @@ describe WorkflowsApiClient do
     end
     let(:workflow_code) { Faker::Number.between(from: 1, to: 10) }
     let(:input_values) { { key: 'test' } }
-    let(:external_params) do
-      {
-        user_external_id: Faker::Number.between(from: 1, to: 10),
-        account_external_id: Faker::Number.between(from: 1, to: 10)
-      }
-    end
+    let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
+    let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
+    let(:external_params) { [user_external_id, account_external_id] }
     let(:expected_params) do
       {
         body_params: {
           workflow_code: workflow_code, input_values: input_values,
-          user_external_id: external_params[:user_external_id],
-          account_external_id: external_params[:account_external_id]
+          user_external_id: user_external_id, account_external_id: account_external_id
         }
       }.merge(expected_headers)
     end
@@ -119,18 +111,15 @@ describe WorkflowsApiClient do
 
     context 'when all params are present' do
       let(:workflow_code) { Faker::Number.between(from: 1, to: 10) }
-      let(:external_params) do
-        {
-          user_external_id: Faker::Number.between(from: 1, to: 10),
-          account_external_id: Faker::Number.between(from: 1, to: 10)
-        }
-      end
+      let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
+      let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
+      let(:external_params) { [user_external_id, account_external_id] }
       let(:expected_body) do
         {
           body_params: {
             workflow_code: workflow_code, input_values: input_values,
-            user_external_id: external_params[:user_external_id],
-            account_external_id: external_params[:account_external_id]
+            user_external_id: user_external_id,
+            account_external_id: account_external_id
           }
         }
       end
@@ -154,12 +143,13 @@ describe WorkflowsApiClient do
 
     context 'when user_external_id is not present' do
       let(:workflow_code) { Faker::Number.between(from: 1, to: 10) }
-      let(:external_params) { { account_external_id: Faker::Number.between(from: 1, to: 10) } }
+      let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
+      let(:external_params) { [nil, account_external_id] }
       let(:expected_body) do
         {
           body_params: {
             workflow_code: workflow_code, input_values: input_values,
-            account_external_id: external_params[:account_external_id]
+            account_external_id: account_external_id
           }
         }
       end
@@ -171,12 +161,13 @@ describe WorkflowsApiClient do
 
     context 'when account_external_id is not present' do
       let(:workflow_code) { Faker::Number.between(from: 1, to: 10) }
-      let(:external_params) { { user_external_id: Faker::Number.between(from: 1, to: 10) } }
+      let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
+      let(:external_params) { [user_external_id, nil] }
       let(:expected_body) do
         {
           body_params: {
             workflow_code: workflow_code, input_values: input_values,
-            user_external_id: external_params[:user_external_id]
+            user_external_id: user_external_id
           }
         }
       end
