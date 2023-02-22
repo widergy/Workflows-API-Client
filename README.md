@@ -100,12 +100,12 @@ WorkflowsApiClient.workflows_show(utility_id, code)
 
 * Params:
   * `filters` It is a hash that supports the filters for the index. For example:
-  ``` ruby
+    ``` ruby
     {
       user_external_id: 2,
       account_external_id: 10500
     }
-  ```
+    ```
 * Method call:
 ``` ruby
 WorkflowsApiClient.workflow_responses_index(utility_id, filters)
