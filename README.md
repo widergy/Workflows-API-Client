@@ -105,7 +105,7 @@ WorkflowsApiClient.workflows_show(utility_id, code)
       user_external_id: 2,
       account_external_id: 10500
     }
-   ```
+  ```
 * Method call:
 ``` ruby
 WorkflowsApiClient.workflow_responses_index(utility_id, filters)
