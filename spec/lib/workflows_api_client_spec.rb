@@ -41,10 +41,10 @@ describe WorkflowsApiClient do
     it_behaves_like 'successful instancing of worker'
   end
 
-  describe '.show_params' do
-    let(:show_params) { { test: Faker::Number.between(from: 1, to: 5) } }
-    let(:service_params) { described_class.show_params(utility_id, show_params) }
-    let(:expected_params) { { uri_params: show_params }.merge(expected_headers) }
+  describe '.uri_params' do
+    let(:uri_params) { { test: Faker::Number.between(from: 1, to: 5) } }
+    let(:service_params) { described_class.uri_params(utility_id, uri_params) }
+    let(:expected_params) { { uri_params: uri_params }.merge(expected_headers) }
 
     it_behaves_like 'returns the expected service response params'
   end
@@ -202,5 +202,14 @@ describe WorkflowsApiClient do
     it 'returns the expected body' do
       expect(build_update_params).to eq(expected_result)
     end
+  end
+
+  describe '.workflow_responses_destroy' do
+    let(:workflow_response_id) { Faker::Number.between(from: 1, to: 5) }
+    let(:worker_class) { WorkflowsApiClient::WorkflowResponsesDestroyByUtilityWorker }
+    let(:method) { :workflow_responses_destroy }
+    let(:args) { [utility_id, workflow_response_id] }
+
+    it_behaves_like 'successful instancing of worker'
   end
 end
