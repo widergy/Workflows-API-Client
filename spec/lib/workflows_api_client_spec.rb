@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe WorkflowsApiClient do
-  let(:utility_id) { 123 }
+  let(:utility_id) { Faker::Number.between(from: 1, to: 5) }
   let(:expected_headers) do
     {
       headers: {
@@ -10,6 +10,11 @@ describe WorkflowsApiClient do
       }
     }
   end
+  let(:workflow_code) { Faker::Number.between(from: 1, to: 5) }
+  let(:input_values) { { key: 'test' } }
+  let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
+  let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
+  let(:workflow_response_id) { Faker::Number.between(from: 1, to: 5) }
 
   describe '.request_headers' do
     let(:headers) { described_class.request_headers(utility_id) }
@@ -37,7 +42,7 @@ describe WorkflowsApiClient do
   end
 
   describe '.uri_params' do
-    let(:uri_params) { { test: 123 } }
+    let(:uri_params) { { test: Faker::Number.between(from: 1, to: 5) } }
     let(:service_params) { described_class.uri_params(utility_id, uri_params) }
     let(:expected_params) { { uri_params: uri_params }.merge(expected_headers) }
 
@@ -62,31 +67,32 @@ describe WorkflowsApiClient do
   end
 
   describe '.workflow_responses_show' do
-    let(:id) { Faker::Number.between(from: 1, to: 5) }
     let(:worker_class) { WorkflowsApiClient::WorkflowResponsesShowByUtilityWorker }
     let(:method) { :workflow_responses_show }
-    let(:args) { [utility_id, id] }
+    let(:args) { [utility_id, workflow_response_id] }
 
     it_behaves_like 'successful instancing of worker'
   end
 
   describe '.workflow_responses_create' do
-    let(:workflow_code) { Faker::Number.between(from: 1, to: 5) }
-    let(:input_values) { { key: 'test' } }
     let(:worker_class) { WorkflowsApiClient::WorkflowResponsesCreateByUtilityWorker }
     let(:method) { :workflow_responses_create }
-    let(:args) { [utility_id, workflow_code, input_values] }
+    let(:args) { [utility_id, workflow_code, input_values, user_external_id, account_external_id] }
 
     it_behaves_like 'successful instancing of worker'
   end
 
   describe '.create_params' do
-    let(:workflow_code) { 12 }
-    let(:input_values) { { key: 'test' } }
-    let(:service_params) { described_class.create_params(utility_id, workflow_code, input_values) }
+    let(:service_params) do
+      described_class.create_params(utility_id, workflow_code, input_values, external_params)
+    end
+    let(:external_params) { [user_external_id, account_external_id] }
     let(:expected_params) do
       {
-        body_params: { workflow_code: workflow_code, input_values: input_values }
+        body_params: {
+          workflow_code: workflow_code, input_values: input_values,
+          user_external_id: user_external_id, account_external_id: account_external_id
+        }
       }.merge(expected_headers)
     end
 
@@ -94,14 +100,19 @@ describe WorkflowsApiClient do
   end
 
   describe '.build_body_params' do
-    let(:build_body_params) { described_class.build_body_params(workflow_code, input_values) }
-    let(:input_values) { { key: 'test' } }
+    let(:build_body_params) do
+      described_class.build_body_params(workflow_code, external_params, input_values)
+    end
 
-    context 'when workflow_code is present' do
-      let(:workflow_code) { 12 }
+    context 'when all params are present' do
+      let(:external_params) { [user_external_id, account_external_id] }
       let(:expected_body) do
         {
-          body_params: { workflow_code: workflow_code, input_values: input_values }
+          body_params: {
+            workflow_code: workflow_code, input_values: input_values,
+            user_external_id: user_external_id,
+            account_external_id: account_external_id
+          }
         }
       end
 
@@ -110,9 +121,44 @@ describe WorkflowsApiClient do
       end
     end
 
-    context 'when workflow_code is not present' do
+    context 'when workflow_code and external_params are not present' do
+      let(:build_body_params) do
+        described_class.build_body_params(workflow_code, input_values)
+      end
       let(:workflow_code) { nil }
       let(:expected_body) { { body_params: { input_values: input_values } } }
+
+      it 'returns the expected body' do
+        expect(build_body_params).to eq(expected_body)
+      end
+    end
+
+    context 'when user_external_id is not present' do
+      let(:external_params) { [nil, account_external_id] }
+      let(:expected_body) do
+        {
+          body_params: {
+            workflow_code: workflow_code, input_values: input_values,
+            account_external_id: account_external_id
+          }
+        }
+      end
+
+      it 'returns the expected body' do
+        expect(build_body_params).to eq(expected_body)
+      end
+    end
+
+    context 'when account_external_id is not present' do
+      let(:external_params) { [user_external_id, nil] }
+      let(:expected_body) do
+        {
+          body_params: {
+            workflow_code: workflow_code, input_values: input_values,
+            user_external_id: user_external_id
+          }
+        }
+      end
 
       it 'returns the expected body' do
         expect(build_body_params).to eq(expected_body)
@@ -121,8 +167,6 @@ describe WorkflowsApiClient do
   end
 
   describe '.workflow_responses_update' do
-    let(:workflow_response_id) { Faker::Number.between(from: 1, to: 5) }
-    let(:input_values) { { key: 'test' } }
     let(:worker_class) { WorkflowsApiClient::WorkflowResponsesUpdateByUtilityWorker }
     let(:method) { :workflow_responses_update }
     let(:args) { [utility_id, workflow_response_id, input_values] }
@@ -131,8 +175,6 @@ describe WorkflowsApiClient do
   end
 
   describe '.update_params' do
-    let(:workflow_response_id) { 1 }
-    let(:input_values) { { key: 'test' } }
     let(:service_params) do
       described_class.update_params(utility_id, workflow_response_id, input_values)
     end
@@ -150,8 +192,6 @@ describe WorkflowsApiClient do
     let(:build_update_params) do
       described_class.build_update_params(workflow_response_id, input_values)
     end
-    let(:input_values) { { key: 'test' } }
-    let(:workflow_response_id) { 1 }
     let(:expected_result) do
       {
         body_params: { input_values: input_values },

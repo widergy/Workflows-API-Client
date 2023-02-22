@@ -19,9 +19,9 @@ module WorkflowsApiClient
     )
   end
 
-  def self.workflow_responses_create(utility_id, workflow_code, input_values)
+  def self.workflow_responses_create(utility_id, workflow_code, input_values, *external_params)
     WorkflowResponsesCreateByUtilityWorker.new.execute(
-      create_params(utility_id, workflow_code, input_values)
+      create_params(utility_id, workflow_code, input_values, external_params)
     )
   end
 

@@ -75,6 +75,96 @@ The same explanation but prettier:
 
 `mount WorkflowsApiClient::Engine, at: "/#{WorkflowsApiClient.config[:services_namespace]}", as: 'workflows_api_client'`.
 
+## Methods
+All methods will receive as first parameter the `utility_id` value corresponding to the unique code for the utility in UGO.
+### Workflows
+#### Index
+
+* Method call:
+``` ruby
+WorkflowsApiClient.workflows_index(utility_id)
+```
+
+#### Show:
+
+* Params:
+  * `code` It is the unique code of the workflow
+
+* Method call:
+``` ruby
+WorkflowsApiClient.workflows_show(utility_id, code)
+```
+### Workflow Responses
+
+#### Index:
+
+* Params:
+  * `filters` It is a hash that supports the filters for the index. For example:
+    ``` ruby
+    {
+      user_external_id: 2,
+      account_external_id: 10500
+    }
+    ```
+* Method call:
+``` ruby
+WorkflowsApiClient.workflow_responses_index(utility_id, filters)
+```
+
+#### Show:
+
+* Params:
+  * `id` It is the unique id of the workflow response
+* Method call:
+``` ruby
+WorkflowsApiClient.workflow_responses_show(utility_id, id)
+```
+
+#### Create:
+
+* Params:
+  * `workflow_code` It is the unique code of the workflow
+  * `input_values` It is a hash containing the input_values of the workflow step, for example:
+    ``` ruby
+    {
+      key: 'value'
+    }
+    ```
+  * `external_params` These are the extra and optional parameters supported by the creation of a      workflow response. At the moment they will be `user_external_id` and `account_external_id`.
+  
+    Method call example:
+    ``` ruby
+      WorkflowsApiClient.workflow_responses_create(utility_id, workflow_code, input_values, user_external_id, account_external_id)
+    ```
+* Method call code:
+``` ruby
+WorkflowsApiClient.workflow_responses_create(utility_id, workflow_code, input_values, *external_params)
+```
+
+#### Update:
+
+* Params:
+  * `workflow_response_id` It is the unique id of the workflow response
+  * `input_values` It is a hash containing the input_values of the workflow step, for example:
+    ``` ruby
+    {
+      key: 'value'
+    }
+    ```
+* Method call:
+``` ruby
+WorkflowsApiClient.workflow_responses_update(utility_id, workflow_response_id, input_values)
+```
+
+#### Destroy:
+
+* Params:
+  * `workflow_response_id` It is the unique id of the workflow response
+* Method call:
+``` ruby
+WorkflowsApiClient.workflow_responses_destroy(utility_id, workflow_response_id)
+```
+
 ## Development
 
 To use the gem locally we have to make some configurations. Especially to be able to run the tests correctly.
