@@ -8,11 +8,11 @@ http_interactions:
       string: ''
     headers:
       Utility-Id:
-      - '8'
+      - '4'
       Key:
-      - APPLICATION_API_KEY:1676403229
+      - APPLICATION_API_KEY:1677264272
       Digest:
-      - Wem/zwL4yoFYcUbTuD0Xo1g35A0uLzJmKUMrRIJawAM=
+      - ZNt3bRb97+VqL4qR7OtqYjBFDwpJDPqRp6PYsYSgHCQ=
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -27,11 +27,11 @@ http_interactions:
       Content-Type:
       - application/json
       Content-Length:
-      - '622'
+      - '738'
       X-Apiary-Ratelimit-Limit:
       - '120'
       X-Apiary-Ratelimit-Remaining:
-      - '119'
+      - '118'
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Methods:
@@ -41,40 +41,24 @@ http_interactions:
       Access-Control-Max-Age:
       - '10'
       X-Apiary-Transaction-Id:
-      - 63ebe21eeec26e0077f67848
+      - 63f9059154cf03007d576c45
       Date:
-      - Tue, 14 Feb 2023 19:33:50 GMT
+      - Fri, 24 Feb 2023 18:44:33 GMT
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: |-
-        {
-            "id": 1,
-            "workflow_code": 1,
-            "state": "in_progress",
-            "context": { "key": "value" },
-            "current_input_values": {},
-            "step_responses_count": 3,
-            "total_step_responses_count": 6,
-            "current_step": {
-                "code": "initial_step_w_1",
-                "name": "Ingreso de NIS",
-                "form": {
-                    "fields": [
-                        {
-                            "field_options": []
-                        }
-                    ]
-                },
-                "can_cancel": false,
-                "can_edit": true,
-                "is_last_step_response": false,
-                "can_return": false,
-                "checkpoint": true,
-                "is_final": false
-            }
-        }
+      string: "{\n    \"id\": 1,\n    \"workflow_code\": 1,\n    \"status\": \"in_progress\",\n
+        \   \"started_at\": \"2019-03-29T14:20:55.000-03:00\",\n    \"workflow_name\":
+        \"Cambio Titularidad\",            \n    \"context\": { \"key\": \"value\"
+        },\n    \"current_input_values\": {},\n    \"step_responses_count\": 3,\n
+        \   \"total_step_responses_count\": 6,\n    \"cancellable\": false,            \n
+        \   \"current_step\": {\n        \"code\": \"initial_step_w_1\",\n        \"name\":
+        \"Ingreso de NIS\",\n        \"form\": {\n            \"fields\": [\n                {\n
+        \                   \"field_options\": []\n                }\n            ]\n
+        \       },\n        \"can_edit\": true,\n        \"is_last_step_response\":
+        false,\n        \"can_return\": false,\n        \"checkpoint\": true,\n        \"is_final\":
+        false\n    }\n}"
     http_version: 
-  recorded_at: Tue, 14 Feb 2023 19:33:50 GMT
+  recorded_at: Fri, 24 Feb 2023 18:44:33 GMT
 recorded_with: VCR 4.0.0
