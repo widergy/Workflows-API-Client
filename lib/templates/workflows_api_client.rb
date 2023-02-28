@@ -28,7 +28,8 @@ WorkflowsApiClient.configure do |config|
   config.skip_auth_workflows_services = %i[]
 
   # config.skip_auth_workflow_response_services Is optional, These are the workflow response
-  # services that we do not want to authenticate and the possible values to include in the Array are:
+  # services that we do not want to authenticate and the possible values
+  # to include in the Array are:
   # %i[index show create update destroy]
   config.skip_auth_workflow_response_services = %i[]
 
