@@ -19,6 +19,10 @@ describe WorkflowsApiClient::WorkflowsController, type: :controller do
     context 'when Utility-Id header is not present' do
       it_behaves_like 'responds with the exception of missing parameters'
     end
+
+    context 'with authentication disabled' do
+      it_behaves_like 'authentication disabled service'
+    end
   end
 
   describe 'GET #show' do

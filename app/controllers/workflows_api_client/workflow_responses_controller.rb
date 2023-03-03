@@ -1,5 +1,8 @@
 module WorkflowsApiClient
   class WorkflowResponsesController < ApplicationBaseController
+    skip_before_action :authenticate_request,
+                       only: WorkflowsApiClient.config[:skip_auth_workflow_response_services]
+
     include AsyncRequestHelper
 
     def index

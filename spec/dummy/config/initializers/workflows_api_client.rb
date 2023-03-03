@@ -22,6 +22,16 @@ WorkflowsApiClient.configure do |config|
   # gem. By default it will be the 'ApplicationController' of the gem.
   config.controller_to_inherit_authentication = 'DummyFatherController'
 
+  # config.skip_auth_workflows_services Is optional, These are the workflow services
+  # that we do not want to authenticate and the possible values to include in the Array are:
+  # %i[index show]
+  config.skip_auth_workflows_services = %i[index]
+
+  # config.skip_auth_workflow_response_services Is optional, These are the workflow response
+  # services that we do not want to authenticate and the possible values to include in the Array are:
+  # %i[index show create update destroy]
+  config.skip_auth_workflow_response_services = %i[index]
+
   # config.services_namespace This is optional, it defaults to 'workflows' and defines the prefix
   # of the paths that the gem will generate. For example the default path will be set to
   # '/workflows/test'. It can be null and have no prefix '/test'.
