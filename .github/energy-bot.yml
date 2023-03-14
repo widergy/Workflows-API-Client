@@ -17,7 +17,7 @@ handlers:
     # Tiempo en minutos
     defer_time: 0
   mergeable:
-    version: 2
+    version: 1
     active: true
     config:
       # Permitir mergear a master (para librerias)
