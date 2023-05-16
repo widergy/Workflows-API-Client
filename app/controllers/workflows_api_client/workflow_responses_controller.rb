@@ -53,12 +53,12 @@ module WorkflowsApiClient
     end
 
     def permitted_index_params
-      params.permit(%i[user_external_id account_external_id]).to_h
+      params.permit(%i[account_id]).to_h
     end
 
     def permitted_create_params
       params.require(%i[workflow_code input_values])
-      params.permit(:user_external_id, :account_external_id, :workflow_code, input_values: {})
+      params.permit(:account_id, :workflow_code, input_values: {})
     end
 
     def permitted_update_params
