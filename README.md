@@ -102,8 +102,8 @@ WorkflowsApiClient.workflows_show(utility_id, code)
   * `filters` It is a hash that supports the filters for the index. For example:
     ``` ruby
     {
-      user_external_id: 2,
-      account_external_id: 10500
+      consumer_user_id: 2,
+      consumer_account_id: 10500
     }
     ```
 * Method call:
@@ -130,11 +130,11 @@ WorkflowsApiClient.workflow_responses_show(utility_id, id)
       key: 'value'
     }
     ```
-  * `external_params` These are the extra and optional parameters supported by the creation of a      workflow response. At the moment they will be `user_external_id` and `account_external_id`.
+  * `external_params` These are the extra and optional parameters supported by the creation of a workflow response. At the moment they will be `consumer_user_id` and `consumer_account_id`.
   
     Method call example:
     ``` ruby
-      WorkflowsApiClient.workflow_responses_create(utility_id, workflow_code, input_values, user_external_id, account_external_id)
+      WorkflowsApiClient.workflow_responses_create(utility_id, workflow_code, input_values, consumer_user_id, consumer_account_id)
     ```
 * Method call code:
 ``` ruby
