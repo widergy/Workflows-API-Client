@@ -16,6 +16,8 @@ module WorkflowsApiClient
     def execute(params)
       @params = params
       perform
+    rescue StandardError => e
+      error_response(e)
     end
 
     private
@@ -32,6 +34,10 @@ module WorkflowsApiClient
         query_params: params[:query_params],
         uri_params: params[:uri_params]
       }.merge(service_params)
+    end
+
+    def error_response(error)
+      ErrorResponseBuilder.new(:unprocessable_entity, utility).add_error(:workflows_api_client_error, error.message)
     end
   end
 end

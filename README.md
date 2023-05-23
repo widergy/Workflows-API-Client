@@ -134,7 +134,7 @@ WorkflowsApiClient.workflow_responses_show(utility_id, id)
   
     Method call example:
     ``` ruby
-      WorkflowsApiClient.workflow_responses_create(utility_id, workflow_code, input_values, consumer_user_id, consumer_account_id)
+      WorkflowsApiClient.workflow_responses_create(utility_id, workflow_code, input_values, consumer_user_id, consumer_account_id, utility_user_id, utility_account_id)
     ```
 * Method call code:
 ``` ruby
