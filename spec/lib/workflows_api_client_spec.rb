@@ -12,8 +12,8 @@ describe WorkflowsApiClient do
   end
   let(:workflow_code) { Faker::Number.between(from: 1, to: 5) }
   let(:input_values) { { key: 'test' } }
-  let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
-  let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
+  let(:consumer_user_id) { Faker::Number.between(from: 1, to: 10) }
+  let(:consumer_account_id) { Faker::Number.between(from: 1, to: 10) }
   let(:workflow_response_id) { Faker::Number.between(from: 1, to: 5) }
 
   describe '.request_headers' do
@@ -77,7 +77,7 @@ describe WorkflowsApiClient do
   describe '.workflow_responses_create' do
     let(:worker_class) { WorkflowsApiClient::WorkflowResponsesCreateByUtilityWorker }
     let(:method) { :workflow_responses_create }
-    let(:args) { [utility_id, workflow_code, input_values, user_external_id, account_external_id] }
+    let(:args) { [utility_id, workflow_code, input_values, consumer_user_id, consumer_account_id] }
 
     it_behaves_like 'successful instancing of worker'
   end
@@ -86,12 +86,12 @@ describe WorkflowsApiClient do
     let(:service_params) do
       described_class.create_params(utility_id, workflow_code, input_values, external_params)
     end
-    let(:external_params) { [user_external_id, account_external_id] }
+    let(:external_params) { [consumer_user_id, consumer_account_id] }
     let(:expected_params) do
       {
         body_params: {
           workflow_code: workflow_code, input_values: input_values,
-          user_external_id: user_external_id, account_external_id: account_external_id
+          consumer_user_id: consumer_user_id, consumer_account_id: consumer_account_id
         }
       }.merge(expected_headers)
     end
@@ -105,13 +105,13 @@ describe WorkflowsApiClient do
     end
 
     context 'when all params are present' do
-      let(:external_params) { [user_external_id, account_external_id] }
+      let(:external_params) { [consumer_user_id, consumer_account_id] }
       let(:expected_body) do
         {
           body_params: {
             workflow_code: workflow_code, input_values: input_values,
-            user_external_id: user_external_id,
-            account_external_id: account_external_id
+            consumer_user_id: consumer_user_id,
+            consumer_account_id: consumer_account_id
           }
         }
       end
@@ -133,13 +133,13 @@ describe WorkflowsApiClient do
       end
     end
 
-    context 'when user_external_id is not present' do
-      let(:external_params) { [nil, account_external_id] }
+    context 'when consumer_user_id is not present' do
+      let(:external_params) { [nil, consumer_account_id] }
       let(:expected_body) do
         {
           body_params: {
             workflow_code: workflow_code, input_values: input_values,
-            account_external_id: account_external_id
+            consumer_account_id: consumer_account_id
           }
         }
       end
@@ -149,13 +149,13 @@ describe WorkflowsApiClient do
       end
     end
 
-    context 'when account_external_id is not present' do
-      let(:external_params) { [user_external_id, nil] }
+    context 'when consumer_account_id is not present' do
+      let(:external_params) { [consumer_user_id, nil] }
       let(:expected_body) do
         {
           body_params: {
             workflow_code: workflow_code, input_values: input_values,
-            user_external_id: user_external_id
+            consumer_user_id: consumer_user_id
           }
         }
       end

@@ -59,15 +59,13 @@ describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
     let(:service) do
       post :create, params: {
         use_route: 'workflows/workflow_responses', workflow_code: workflow_code,
-        input_values: input_values, user_external_id: user_external_id,
-        account_external_id: account_external_id
+        input_values: input_values, account_id: consumer_account_id
       }
     end
     let(:headers) { { 'Utility-Id': utility_id.to_s, 'Content-Type': 'application/json' } }
     let(:input_values) { { key: 'value' } }
     let(:workflow_code) { Faker::Number.between(from: 1, to: 10) }
-    let(:user_external_id) { Faker::Number.between(from: 1, to: 10) }
-    let(:account_external_id) { Faker::Number.between(from: 1, to: 10) }
+    let(:consumer_account_id) { Faker::Number.between(from: 1, to: 10) }
 
     context 'when parameters are valid' do
       context 'when calling the appropriate worker' do

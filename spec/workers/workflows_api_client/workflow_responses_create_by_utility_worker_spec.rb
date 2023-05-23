@@ -5,14 +5,14 @@ describe WorkflowsApiClient::WorkflowResponsesCreateByUtilityWorker do
 
   describe '#execute' do
     let(:utility_id) { Faker::Number.between(from: 1, to: 10) }
-    let(:user_external_id) { 11 }
-    let(:account_external_id) { 22 }
+    let(:consumer_user_id) { 11 }
+    let(:consumer_account_id) { 22 }
     let(:workflow_code) { 1 }
     let(:body_params) do
       {
         workflow_code: workflow_code,
-        user_external_id: user_external_id,
-        account_external_id: account_external_id,
+        consumer_user_id: consumer_user_id,
+        consumer_account_id: consumer_account_id,
         input_values: { key: 'value' }
       }
     end
