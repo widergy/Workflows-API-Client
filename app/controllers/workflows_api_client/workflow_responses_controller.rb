@@ -34,9 +34,7 @@ module WorkflowsApiClient
 
     def index_params
       {
-        query_params: {
-          consumer_account_id: params[:account_id]
-        }.compact.merge(current_user_ids.slice(:consumer_user_id))
+        query_params: { consumer_account_id: params[:account_id] }.merge(current_user_id).compact
       }
     end
 
@@ -46,7 +44,7 @@ module WorkflowsApiClient
 
     def create_params
       {
-        body_params: permitted_create_params.to_h.merge(current_user_ids)
+        body_params: permitted_create_params.to_h.merge(current_user_id).compact
       }
     end
 
@@ -61,6 +59,7 @@ module WorkflowsApiClient
     def permitted_create_params
       params.require(%i[workflow_code input_values])
       params.permit(:account_id, :workflow_code, input_values: {})
+            .transform_keys! { |key| key == 'account_id' ? 'consumer_account_id' : key }
     end
 
     def permitted_update_params
@@ -68,11 +67,8 @@ module WorkflowsApiClient
       params.permit(:id, input_values: {})
     end
 
-    def current_user_ids
-      {
-        consumer_user_id: current_user&.id,
-        utility_user_id: current_user&.external_id
-      }.compact
+    def current_user_id
+      { consumer_user_id: current_user&.id }
     end
   end
 end
