@@ -37,7 +37,7 @@ module WorkflowsApiClient
     end
 
     def error_response(error)
-      ErrorResponseBuilder.new(:unprocessable_entity, utility).add_error(:workflows_api_client_error, error.message)
+      ErrorResponseBuilder.new(:unprocessable_entity).add_error(:workflows_api_client_error, message: error.message).to_a
     end
   end
 end
