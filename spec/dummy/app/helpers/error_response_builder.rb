@@ -7,14 +7,9 @@ class ErrorResponseBuilder
     @utility = utility
   end
 
-  def add_status(status)
-    @status = status_code(status)
-    self
-  end
-
   def add_error(identifier, message: nil, meta: nil)
     payload[:errors] << {
-      status: status_code(status),
+      status: status,
       code: identifier,
       message: message,
       meta: meta
@@ -24,6 +19,6 @@ class ErrorResponseBuilder
 
   # For using in workers to return the error response
   def to_a
-    [status, to_h]
+    [status, payload]
   end
 end
