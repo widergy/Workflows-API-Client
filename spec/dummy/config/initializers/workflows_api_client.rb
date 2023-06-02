@@ -22,6 +22,9 @@ WorkflowsApiClient.configure do |config|
   # gem. By default it will be the 'ApplicationController' of the gem.
   config.controller_to_inherit_authentication = 'DummyFatherController'
 
+  # config.error_builder: Is optional, it shall be the class that has the desired error handling.
+  config.error_builder = 'ErrorResponseBuilder'
+
   # config.skip_auth_workflows_services Is optional, These are the workflow services
   # that we do not want to authenticate and the possible values to include in the Array are:
   # %i[index show]

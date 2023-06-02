@@ -5,7 +5,7 @@ describe WorkflowsApiClient::WorkflowResponsesIndexByUtilityWorker do
 
   describe '#execute' do
     let(:utility_id) { Faker::Number.between(from: 1, to: 10) }
-    let(:query_params) { { user_external_id: 2 } }
+    let(:query_params) { { consumer_user_id: 2 } }
     let(:utility_id_header) { { 'Utility-Id': utility_id.to_s } }
     let(:params) { { headers: utility_id_header, query_params: query_params } }
     let(:base_url) { worker_instance.class::BASE_URL }

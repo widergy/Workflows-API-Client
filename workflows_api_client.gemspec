@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.test_files = Dir['spec/**/*']
 
   # Rails
-  spec.add_dependency 'rails', '< 6'
+  spec.add_dependency 'rails', '> 5'
 
   # Sidekiq
   spec.add_dependency 'sidekiq', '< 7'

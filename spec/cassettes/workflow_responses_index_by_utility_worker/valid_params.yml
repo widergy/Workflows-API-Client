@@ -2,17 +2,17 @@
 http_interactions:
 - request:
     method: get
-    uri: https://private-720a83-workflowsapi1.apiary-mock.com/api/v1/workflow_responses?user_external_id=2
+    uri: https://private-720a83-workflowsapi1.apiary-mock.com/api/v1/workflow_responses?consumer_user_id=2
     body:
       encoding: US-ASCII
       string: ''
     headers:
       Utility-Id:
-      - '5'
+      - '3'
       Key:
-      - APPLICATION_API_KEY:1677264271
+      - APPLICATION_API_KEY:1685634779
       Digest:
-      - kK8Fomswaa2RQ01t/c7NcectUZN2Avm5phF9rg/vtJs=
+      - fq7JhORgFzebd21wf/b+VJE5kJEjWggUEkA9Bbj8d0Y=
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -27,7 +27,7 @@ http_interactions:
       Content-Type:
       - application/json
       Content-Length:
-      - '814'
+      - '1044'
       X-Apiary-Ratelimit-Limit:
       - '120'
       X-Apiary-Ratelimit-Remaining:
@@ -41,25 +41,51 @@ http_interactions:
       Access-Control-Max-Age:
       - '10'
       X-Apiary-Transaction-Id:
-      - 63f9059054cf03007d576c3c
+      - 6478bee774f2d800775172d0
       Date:
-      - Fri, 24 Feb 2023 18:44:32 GMT
+      - Thu, 01 Jun 2023 15:53:11 GMT
       Connection:
       - keep-alive
+      Akamai-Grn:
+      - 0.0895c017.1685634791.29c874c2
     body:
       encoding: UTF-8
-      string: "{\n    \"workflow_responses\": [\n        {\n            \"id\": 1,\n
-        \           \"workflow_code\": 1,\n            \"status\": \"in_progress\",\n
-        \           \"started_at\": \"2019-03-29T14:20:55.000-03:00\",\n            \"workflow_name\":
-        \"Cambio Titularidad\",\n            \"cancellable\": false\n        },\n
-        \       {\n            \"id\": 2,\n            \"workflow_code\": 44,\n            \"status\":
-        \"in_progress\",\n            \"started_at\": \"2019-03-29T14:20:55.000-03:00\",\n
-        \           \"workflow_name\": \"Baja de servicio\",\n            \"cancellable\":
-        false\n        },\n        {\n            \"id\": 3,\n            \"workflow_code\":
-        1,\n            \"status\": \"in_progress\",\n            \"started_at\":
-        \"2019-03-29T14:20:55.000-03:00\",\n            \"workflow_name\": \"Alta
-        de servicio\",\n            \"cancellable\": true                    \n        }\n
-        \   ]\n}"
+      string: |-
+        {
+            "workflow_responses": [
+                {
+                    "id": 1,
+                    "workflow_code": 1,
+                    "status": "in_progress",
+                    "status_label": "En proceso",
+                    "started_at": "2019-03-29T14:20:55.000-03:00",
+                    "workflow_name": "Cambio Titularidad",
+                    "cancellable": false,
+                    "brief_context": { "external_id": "12345" }
+                },
+                {
+                    "id": 2,
+                    "workflow_code": 44,
+                    "status": "in_progress",
+                    "status_label": "En proceso",
+                    "started_at": "2019-03-29T14:20:55.000-03:00",
+                    "workflow_name": "Baja de servicio",
+                    "cancellable": false,
+                    "brief_context": {}
+
+                },
+                {
+                    "id": 3,
+                    "workflow_code": 1,
+                    "status": "in_progress",
+                    "status_label": "En proceso",
+                    "started_at": "2019-03-29T14:20:55.000-03:00",
+                    "workflow_name": "Alta de servicio",
+                    "cancellable": true,
+                    "brief_context": {}
+                }
+            ]
+        }
     http_version: 
-  recorded_at: Fri, 24 Feb 2023 18:44:32 GMT
+  recorded_at: Thu, 01 Jun 2023 15:53:11 GMT
 recorded_with: VCR 4.0.0
