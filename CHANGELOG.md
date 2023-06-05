@@ -8,6 +8,17 @@ All notable changes to this project will be documented in this file, in reverse 
 * `Y` (MINOR) is bumped when we add new features. Occasionally a `Y` release may include small breaking changes. Those will be notified via CHANGELOG entries and/or deprecation notices if there are breaking changes.
 * `X` (MAJOR) is incremented for significant breaking changes. This is reserved for special occasions, like when an API version is deprecated.
 
+## [`2.0.1`] (2023-06-02)
+
+### Breaking changes:
+* None
+
+### Fixes:
+* fix: Update Readme's "Usage and Configuration"
+
+### Minor enhancements / New features:
+* None
+
 ## [`2.0.0`] (2023-06-02)
 
 ### Breaking changes:
