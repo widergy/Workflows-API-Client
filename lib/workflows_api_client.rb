@@ -8,6 +8,7 @@ module WorkflowsApiClient
     consumer_api_secret: '',
     async_request_helper: 'AsyncRequest::ApplicationHelper',
     controller_to_inherit_authentication: 'ApplicationController',
+    error_builder: 'ErrorResponseBuilder',
     skip_auth_workflows_services: %i[],
     skip_auth_workflow_response_services: %i[],
     services_namespace: 'workflows',
@@ -36,6 +37,10 @@ module WorkflowsApiClient
 
   def self.controller_to_inherit_authentication=(controller_to_inherit_authentication)
     @config[:controller_to_inherit_authentication] = controller_to_inherit_authentication
+  end
+
+  def self.error_builder=(error_builder)
+    @config[:error_builder] = error_builder
   end
 
   def self.skip_auth_workflows_services=(skip_auth_workflows_services)

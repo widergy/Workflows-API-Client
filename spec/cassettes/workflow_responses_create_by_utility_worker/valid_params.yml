@@ -5,16 +5,16 @@ http_interactions:
     uri: https://private-720a83-workflowsapi1.apiary-mock.com/api/v1/workflow_responses
     body:
       encoding: UTF-8
-      string: '{"workflow_code":1,"user_external_id":11,"account_external_id":22,"input_values":{"key":"value"}}'
+      string: '{"workflow_code":1,"consumer_user_id":14,"consumer_account_id":14,"input_values":{"key":"value"}}'
     headers:
       Utility-Id:
-      - '1'
+      - '5'
       Content-Type:
       - application/json
       Key:
-      - APPLICATION_API_KEY:1676667914
+      - APPLICATION_API_KEY:1685643156
       Digest:
-      - mbuKJwiM3s2Ut+qYinCkLwguukvs+6FAc0k/qW6PZGU=
+      - m7xQT4h4o3TfI2R7qAg8Cp49tHr03rPwYHChw6E/xms=
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -29,7 +29,7 @@ http_interactions:
       Content-Type:
       - application/json
       Content-Length:
-      - '623'
+      - '761'
       X-Apiary-Ratelimit-Limit:
       - '120'
       X-Apiary-Ratelimit-Remaining:
@@ -43,40 +43,26 @@ http_interactions:
       Access-Control-Max-Age:
       - '10'
       X-Apiary-Transaction-Id:
-      - 63efec0bab66840077056dfd
+      - 6478df97da19320085d3a8ce
       Date:
-      - Fri, 17 Feb 2023 21:05:15 GMT
+      - Thu, 01 Jun 2023 18:12:39 GMT
       Connection:
       - keep-alive
+      Akamai-Grn:
+      - 0.0895c017.1685643158.2e3b98c8
     body:
       encoding: UTF-8
-      string: |-
-        {
-            "id": 1,
-            "workflow_code": 1,
-            "state": "in_progress",
-            "context": { "key": "value" },
-            "current_input_values": {},
-            "step_responses_count": 0,
-            "total_step_responses_count": 6,
-            "current_step": {
-                "code": "second_step_w_1",
-                "name": "Ingreso de Nonbre",
-                "form": {
-                    "fields": [
-                        {
-                            "field_options": []
-                        }
-                    ]
-                },
-                "can_cancel": true,
-                "can_edit": true,
-                "is_last_step_response": false,
-                "can_return": false,
-                "checkpoint": true,
-                "is_final": false
-            }
-        }
+      string: "{\n    \"id\": 1,\n    \"workflow_code\": 1,\n    \"status\": \"in_progress\",\n
+        \   \"status_label\": \"En proceso\",\n    \"started_at\": \"2019-03-29T14:20:55.000-03:00\",\n
+        \   \"workflow_name\": \"Cambio Titularidad\",\n    \"context\": { \"key\":
+        \"value\" },\n    \"current_input_values\": {},\n    \"step_responses_count\":
+        0,\n    \"total_step_responses_count\": 6,\n    \"cancellable\": true,            \n
+        \   \"current_step\": {\n        \"code\": \"second_step_w_1\",\n        \"name\":
+        \"Ingreso de Nonbre\",\n        \"form\": {\n            \"fields\": [\n                {\n
+        \                   \"field_options\": []\n                }\n            ]\n
+        \       },\n        \"can_edit\": true,\n        \"is_last_step_response\":
+        false,\n        \"can_return\": false,\n        \"checkpoint\": true,\n        \"is_final\":
+        false\n    }\n}"
     http_version: 
-  recorded_at: Fri, 17 Feb 2023 21:05:15 GMT
+  recorded_at: Thu, 01 Jun 2023 18:12:37 GMT
 recorded_with: VCR 4.0.0
