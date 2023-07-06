@@ -93,7 +93,7 @@ describe WorkflowsApiClient::WorkflowResponsesController, type: :controller do
     let(:service) do
       put :update, params: { use_route: 'workflows/workflow_responses/:id', **params }
     end
-    let(:params) { { id: id, input_values: input_values }.compact } 
+    let(:params) { { id: id, input_values: input_values }.compact }
     let(:headers) { { 'Utility-Id': utility_id.to_s, 'Content-Type': 'application/json' } }
     let(:input_values) { [{ key: 'value' }, {}].sample }
     let(:id) { Faker::Number.between(from: 1, to: 10) }
