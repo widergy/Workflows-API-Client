@@ -63,12 +63,17 @@ module WorkflowsApiClient
     end
 
     def permitted_update_params
-      params.require(%i[id input_values])
+      params.require(:id)
+      missing_input_values unless params.include?(:input_values)
       params.permit(:id, input_values: {})
     end
 
     def current_user_id
       { consumer_user_id: current_user&.id }
+    end
+
+    def missing_input_values
+      raise ActionController::ParameterMissing, 'input_values'
     end
   end
 end
