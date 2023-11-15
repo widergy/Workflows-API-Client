@@ -19,9 +19,6 @@ Gem::Specification.new do |spec|
   # Rails
   spec.add_dependency 'rails', '> 5'
 
-  # Sidekiq
-  spec.add_dependency 'sidekiq', '< 7'
-
   # Awesome Print is a Ruby library that pretty prints Ruby objects in full color exposing their
   # internal structure with proper indentation
   spec.add_development_dependency 'awesome_print'
