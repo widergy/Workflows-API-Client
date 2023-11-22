@@ -19,7 +19,7 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Minor enhancements / New features:
 * [#26](https://github.com/widergy/Workflows-API-Client/pull/26): feat: [DEV-338] remove unnecessary dependency on sidekiq
 
-## [`2.0.2`] (2023-07-11)
+## [`0.2.2`] (2023-07-11)
 
 ### Breaking changes:
 * None
@@ -30,7 +30,7 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Minor enhancements / New features:
 * None
 
-## [`2.0.1`] (2023-06-02)
+## [`0.2.1`] (2023-06-02)
 
 ### Breaking changes:
 * None
@@ -41,7 +41,7 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Minor enhancements / New features:
 * None
 
-## [`2.0.0`] (2023-06-02)
+## [`0.2.0`] (2023-06-02)
 
 ### Breaking changes:
 * [#19](https://github.com/widergy/Workflows-API-Client/pull/19): feat: [DESA-1302] New interfaces on Index and Create Workflow Responses
