@@ -1,5 +1,4 @@
 require 'rails'
-require 'sidekiq'
 
 module WorkflowsApiClient
   class Engine < ::Rails::Engine
