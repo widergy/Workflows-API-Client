@@ -5,7 +5,6 @@ module WorkflowsApiClient
     end
 
     def request_headers
-      puts '!!!!!!!!!!!!!!!!!!  PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAA !!!!!!!!!!!!!!!!!'
       {
         headers: {
           'Utility-Id': utility_id,
