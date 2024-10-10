@@ -10,8 +10,8 @@ module WorkflowsApiClient
           'Utility-Id': utility_id,
           'Content-Type': request.headers['Content-Type'],
           'Channel': channel
-        }
-      }.compact
+        }.compact
+      }
     end
 
     def channel
