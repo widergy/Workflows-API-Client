@@ -9,7 +9,7 @@ module WorkflowsApiClient
         headers: {
           'Utility-Id': utility_id,
           'Content-Type': request.headers['Content-Type'],
-          'Channel': request.headers['Channel']
+          'Channel': channel
         }.compact
       }
     end
