@@ -6,9 +6,11 @@ module WorkflowsApiClient
 
     def request_headers
       {
-        'Utility-Id': utility_id,
-        'Content-Type': request.headers['Content-Type'],
-        'Channel': channel
+        headers: {
+          'Utility-Id': utility_id,
+          'Content-Type': request.headers['Content-Type'],
+          'Channel': channel
+        }
       }.compact
     end
 
