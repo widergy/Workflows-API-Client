@@ -8,9 +8,14 @@ module WorkflowsApiClient
       {
         headers: {
           'Utility-Id': utility_id,
-          'Content-Type': request.headers['Content-Type']
+          'Content-Type': request.headers['Content-Type'],
+          'Channel': channel
         }.compact
       }
+    end
+
+    def channel
+      super if defined?(super)
     end
 
     def utility_id
