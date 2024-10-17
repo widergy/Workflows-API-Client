@@ -15,8 +15,7 @@ module WorkflowsApiClient
     end
 
     def channel
-      return super if defined?(super)
-      nil
+      super if defined?(super)
     end
 
     def utility_id
