@@ -25,7 +25,7 @@ describe WorkflowsApiClient::SurveyHistoriesController, type: :controller do
     end
 
     context 'when parameters are invalid' do
-      let(%i[id input_values].sample) { nil }
+      let(:values) { nil }
 
       it_behaves_like 'responds with the exception of missing parameters'
     end
