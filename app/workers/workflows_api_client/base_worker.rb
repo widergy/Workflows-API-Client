@@ -12,6 +12,8 @@ module WorkflowsApiClient
     BASE_URL = WorkflowsApiClient.config[:workflows_api_url].freeze
     WORKFLOWS_SERVICE_URL = 'workflows'.freeze
     WORKFLOW_RESPONSES_SERVICE_URL = 'workflow_responses'.freeze
+    SURVEYS_SERVICE_URL = 'surveys'.freeze
+    SURVEY_HISTORIES_SERVICE_URL = 'surveys/survey_history'.freeze
 
     def execute(params)
       @params = params
