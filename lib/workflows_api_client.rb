@@ -11,6 +11,8 @@ module WorkflowsApiClient
     error_builder: 'ErrorResponseBuilder',
     skip_auth_workflows_services: %i[],
     skip_auth_workflow_response_services: %i[],
+    skip_auth_survey_services: %i[],
+    skip_auth_survey_history_services: %i[],
     services_namespace: 'workflows',
     define_routes_manually: false
   }
@@ -49,6 +51,14 @@ module WorkflowsApiClient
 
   def self.skip_auth_workflow_response_services=(skip_auth_workflow_response_services)
     @config[:skip_auth_workflow_response_services] = skip_auth_workflow_response_services
+  end
+
+  def self.skip_auth_survey_services=(skip_auth_survey_services)
+    @config[:skip_auth_survey_services] = skip_auth_survey_services
+  end
+
+  def self.skip_auth_survey_history_services=(skip_auth_survey_history_services)
+    @config[:skip_auth_survey_history_services] = skip_auth_survey_history_services
   end
 
   def self.services_namespace=(services_namespace)

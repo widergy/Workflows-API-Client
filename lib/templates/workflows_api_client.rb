@@ -36,6 +36,18 @@ WorkflowsApiClient.configure do |config|
   # %i[index show create update destroy]
   config.skip_auth_workflow_response_services = %i[]
 
+  # config.skip_auth_survey_services Is optional, These are the survey
+  # services that we do not want to authenticate and the possible values
+  # to include in the Array are:
+  # %i[show]
+  config.skip_auth_survey_services = %i[]
+
+  # config.skip_auth_survey_history_services Is optional, These are the survey history
+  # services that we do not want to authenticate and the possible values
+  # to include in the Array are:
+  # %i[update]
+  config.skip_auth_survey_history_services = %i[]
+
   # config.services_namespace This is optional, it defaults to 'workflows' and defines the prefix
   # of the paths that the gem will generate. For example the default path will be set to
   # '/workflows/test'. It can be null and have no prefix '/test'.
