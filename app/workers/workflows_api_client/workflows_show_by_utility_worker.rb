@@ -5,7 +5,8 @@ module WorkflowsApiClient
     def service_params
       {
         http_method: :get,
-        url: "#{BASE_URL}#{WORKFLOWS_SERVICE_URL}/#{params[:uri_params][:code]}"
+        url: "#{BASE_URL}#{WORKFLOWS_SERVICE_URL}/#{params[:uri_params][:code]}",
+        query_params: params[:uri_params].except(:code)
       }
     end
   end
