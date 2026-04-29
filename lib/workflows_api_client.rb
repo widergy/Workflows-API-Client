@@ -14,7 +14,9 @@ module WorkflowsApiClient
     skip_auth_survey_services: %i[],
     skip_auth_survey_history_services: %i[],
     services_namespace: 'workflows',
-    define_routes_manually: false
+    define_routes_manually: false,
+    allow_custom_middlewares: false,
+    custom_middlewares: []
   }
 
   def self.configure
@@ -67,6 +69,14 @@ module WorkflowsApiClient
 
   def self.define_routes_manually=(define_routes_manually)
     @config[:define_routes_manually] = define_routes_manually
+  end
+
+  def self.allow_custom_middlewares=(allow_custom_middlewares)
+    @config[:allow_custom_middlewares] = allow_custom_middlewares
+  end
+
+  def self.custom_middlewares=(custom_middlewares)
+    @config[:custom_middlewares] = custom_middlewares
   end
 
   def self.config
