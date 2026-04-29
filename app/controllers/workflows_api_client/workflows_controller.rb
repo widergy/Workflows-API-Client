@@ -18,7 +18,12 @@ module WorkflowsApiClient
     private
 
     def show_params
-      { uri_params: { code: params.require(:code), input_values: params[:input_values] } }
+      { 
+        uri_params: {
+          code: params.require(:code),
+          input_values: params.permit(input_values: {}).fetch(:input_values, {})
+        }
+      }
     end
   end
 end
