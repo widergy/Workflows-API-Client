@@ -2,13 +2,15 @@ module WorkflowsApiClient
   class RequestPerformer
     include WorkflowsApiClient::RequestPerformerHelper
 
-    def initialize(service)
+    def initialize(service, user_id = nil, utility_id = nil)
       @http_method = service[:http_method]
       @body_params = service[:body_params]
       @headers = service[:headers]
       @query_params = service[:query_params]
       @uri_params = service[:uri_params]
       @url = service[:url]
+      @user = User.find(user_id) if user_id.present?
+      @utility = Utility.find(utility_id) if utility_id.present?
     end
 
     # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
@@ -33,7 +35,7 @@ module WorkflowsApiClient
     private
 
     attr_reader :response, :http_method, :body_params, :uri_params, :query_params, :headers,
-                :url
+                :url, :user, :utility
 
     def formatted_headers
       authentication = WorkflowsApiClient::RequestAuthenticator.new.perform
@@ -43,7 +45,27 @@ module WorkflowsApiClient
 
     def process_response
       log_response(response) if debug_log_level?
+      process_response_handler if should_process_response_handler?
       build_response(response.code, response.parsed_response || {}, response.headers)
+    end
+
+    def should_process_response_handler?
+      WorkflowsApiClient.config[:allow_response_handlers] && utility.present?
+    end
+
+    def process_response_handler
+      response_handlers = WorkflowsApiClient.config[:response_handlers]
+      return if response_handlers.blank?
+
+      response_handlers.each do |handler|
+        next unless handler&.respond_to?(:new)
+
+        response_handler = handler.new(response.parsed_response, user, utility)
+
+        next unless response_handler.should_execute?
+
+        response_handler.execute
+      end
     end
   end
 end
