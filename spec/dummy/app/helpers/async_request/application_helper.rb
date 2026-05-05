@@ -2,7 +2,7 @@ module AsyncRequest
   module ApplicationHelper
     JOB_ID = '5b70a39d-e6f3-4547-bd0f-fe6f9d1fa6af'.freeze
 
-    def execute_async(_worker, _params)
+    def execute_async(_worker, _params, _user, _utility)
       JOB_ID
     end
 

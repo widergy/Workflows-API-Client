@@ -1,10 +1,7 @@
 module WorkflowsApiClient
   class ApplicationBaseController < ControllerInheritanceHelper.inherit
-    include CustomMiddlewaresHelper
-    before_action :execute_custom_middleware
-
     def async_custom_execute(worker_class, worker_params = {})
-      execute_async(worker_class, worker_params.merge(request_headers))
+      execute_async(worker_class, worker_params.merge(request_headers), current_user&.id, utility&.id)
     end
 
     def request_headers
@@ -29,10 +26,12 @@ module WorkflowsApiClient
       utility_header.to_s
     end
 
-    def execute_custom_middleware
-      return unless WorkflowsApiClient.config[:allow_custom_middlewares]
-      return unless custom_middleware.present?
-      custom_middleware.execute(params)
+    def current_user
+      super if defined?(super)
+    end
+
+    def utility
+      super if defined?(super)
     end
   end
 end
