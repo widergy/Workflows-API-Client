@@ -15,8 +15,8 @@ module WorkflowsApiClient
     skip_auth_survey_history_services: %i[],
     services_namespace: 'workflows',
     define_routes_manually: false,
-    allow_custom_middlewares: false,
-    custom_middlewares: []
+    allow_response_handlers: false,
+    response_handlers: []
   }
 
   def self.configure
@@ -71,12 +71,12 @@ module WorkflowsApiClient
     @config[:define_routes_manually] = define_routes_manually
   end
 
-  def self.allow_custom_middlewares=(allow_custom_middlewares)
-    @config[:allow_custom_middlewares] = allow_custom_middlewares
+  def self.allow_response_handlers=(allow_response_handlers)
+    @config[:allow_response_handlers] = allow_response_handlers
   end
 
-  def self.custom_middlewares=(custom_middlewares)
-    @config[:custom_middlewares] = custom_middlewares
+  def self.response_handlers=(response_handlers)
+    @config[:response_handlers] = response_handlers
   end
 
   def self.config

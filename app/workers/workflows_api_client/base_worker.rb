@@ -1,6 +1,6 @@
 module WorkflowsApiClient
   class BaseWorker
-    attr_accessor :params
+    attr_accessor :params, :user_id, :utility_id
 
     def initialize
       workflows_api_url = WorkflowsApiClient.config[:workflows_api_url]
@@ -15,8 +15,10 @@ module WorkflowsApiClient
     SURVEYS_SERVICE_URL = 'surveys'.freeze
     SURVEY_HISTORIES_SERVICE_URL = 'surveys/survey_history'.freeze
 
-    def execute(params)
+    def execute(params, user_id = nil, utility_id = nil)
       @params = params
+      @user_id = user_id
+      @utility_id = utility_id
       perform
     rescue StandardError => e
       error_response(e)
@@ -25,7 +27,7 @@ module WorkflowsApiClient
     private
 
     def perform
-      response = WorkflowsApiClient::RequestPerformer.new(build_service).perform
+      response = WorkflowsApiClient::RequestPerformer.new(build_service, user_id, utility_id).perform
       [response.code, response.body]
     end
 
