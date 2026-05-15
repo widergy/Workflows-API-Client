@@ -2,6 +2,7 @@ module WorkflowsApiClient
   class WorkflowsController < ApplicationBaseController
     skip_before_action :authenticate_request,
                        only: WorkflowsApiClient.config[:skip_auth_workflows_services]
+    before_action :validate_captcha, if: :captcha_required?, only: %i[show]
 
     include AsyncRequestHelper
 
